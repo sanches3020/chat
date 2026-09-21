@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'GeistMono';
+    src: url('/app/fonts/GeistMono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body, button, input, textarea, select {
+    font-family: 'GeistMono', monospace !important;
+}
+.text-mono {
+    font-family: 'GeistMono', monospace !important;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.text0 {
+    font-size: 50px;
+    line-height: 55px;
+    font-weight: bold;
+}
+
+.text1 {
+    text-wrap: wrap;
+    font-size: 32px;
+    line-height: 39px;
+    font-weight: 500;
+}
+
+.text2 {
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.text3 {
+    font-size: 20px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.text4 {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.text5 {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.img160{
+    width: 160px;
+    height: 160px;
+}
+
+md-dialog {
+    background: transparent;
+}
+
+.dialog{
+    max-width: 100%;
+}
+
+

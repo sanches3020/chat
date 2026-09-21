@@ -1,0 +1,61 @@
+services:
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - network
+
+  app:
+    container_name: app
+    image: webdevops/php-apache:7.4
+    restart: always
+    volumes:
+      - ./app:/app
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - APPLICATION_USER=www-data
+      - APPLICATION_GROUP=www-data
+    networks:
+      - network
+    depends_on:
+      - mysql
+
+  admin:
+    container_name: admin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=${DB_HOST}
+    ports:
+      - "8081:80"
+    networks:
+      - network
+    depends_on:
+      - mysql
+
+  proxy:
+    container_name: proxy
+    image: jc21/nginx-proxy-manager:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - ./nginx:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - network
+
+networks:
+  network:

@@ -1,0 +1,113 @@
+*,
+*::before,
+*::after {
+    transition-property: background-color;
+    transition-duration: .2s;
+    transition-timing-function: ease;
+}
+
+.arrow.active {
+    transform: rotate(180deg);
+}
+
+.menu {
+    max-width: 0;
+    min-width: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: max-width 0.3s ease, margin 0.3s ease, border-width 0.3s ease
+}
+
+.menu.opened {
+    border: 1px solid var(--gray200);
+    max-width: 220px;
+    margin-right: 16px;
+}
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-subs {
+    max-height: 0;
+    transition-property: max-height;
+}
+
+.menu-subs.open {
+    max-height: 1000px;
+}
+
+.ripple:active {
+    background-color: var(--gray100);
+    transform: translateY(1px) scale(0.98);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fade {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.fade.ng-hide {
+    opacity: 0;
+}
+
+.ng-leave {
+    display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+.blik {
+    position: relative;
+    /* Решение 1: Запрещаем флексу деформировать и сжимать колонку */
+    min-width: 0;
+    flex-shrink: 0;
+
+    /* Оставляем обрезку только для блика */
+    overflow: hidden;
+}
+
+.blik.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 1.5s linear var(--delay, 0s) 1 forwards;
+}
+
+@keyframes shimmer {
+    0% { left: -150%; }
+    100% { left: 150%; }
+}
+
+.fade.ng-hide {
+    opacity: 0;
+}
+
+.fade.ng-hide-remove,
+.fade.ng-hide-add {
+    display: block !important; /* or inline-block, as appropriate */
+}
+
+.fade.ng-hide-remove {
+    transition: all linear 200ms;
+}
+
+.fade.ng-hide-add {
+    transition: all linear 200ms;
+}
+

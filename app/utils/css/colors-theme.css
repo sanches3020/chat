@@ -1,0 +1,50 @@
+:root {
+    --black: #09090B;
+    --gray50: #141926;
+    --gray100: #020713;
+    --gray200: #252b40;
+    --gray300: #374151;
+    --gray400: #4b5563;
+    --gray500: #9ca3af;
+    --white: #e5e7eb;
+    --disabled: #23272b;
+    --accent: #46aef5;
+    --green: #45be88;
+    --blue: #46aef5;
+    --red: #FF3347;
+    --yellow: #FAFF00;
+    --pay: #da5c9f;
+
+
+
+    --black10: #0f141f;
+    --white-60: #FFFFFF99;
+}
+
+[data-theme="light"] {
+    --black: #ffffff;
+    --gray50: #f9fafb;
+    --gray100: #f3f4f6;
+    --gray200: #e5e7eb;
+    --gray300: #d1d5db;
+    --gray400: #9ca3af;
+    --gray500: #4b5563;
+    --disabled: #e5e7eb;
+    --white: #111827;
+    --accent: #0070f3;
+    --green: #22c55e;
+    --blue: #0070f3;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+}
+
+
+[data-theme="light"] .img-white {
+    filter: invert(5%) sepia(25%) saturate(1307%) hue-rotate(176deg) brightness(101%) contrast(93%);
+}
+
+[data-theme="light"] .img-black {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(213deg) brightness(101%) contrast(103%);
+}
+
+

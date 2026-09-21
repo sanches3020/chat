@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мем чат</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="utils/css/colors-theme.css">
+    <link rel="stylesheet" href="utils/css/colors.css">
+    <link rel="stylesheet" href="utils/css/shorts.css">
+    <link rel="stylesheet" href="utils/css/base.css">
+    <link rel="stylesheet" href="utils/css/animation.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="utils/css/style.css">
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+
+    <script src="controller.js"></script>
+    <script src="dialogs/login/controller.js"></script>
+</head>
+
+<body class="col back-black text-white fill" ng-app="app" ng-controller="main">
+
+<div class="row fill back-black text-white">
+
+    <div class="col back-gray300 p16 gap16 r16 mw300 mh16 mv16">
+        <div class="row acc gap16">
+            <img src="/icon/login.svg" class="img30 cursor" ng-click="openLogin()">
+            <md-autocomplete
+                    class="flex text-white"
+                    md-selected-item="selectedItem"
+                    md-search-text="searchText"
+                    md-items="item in getMatches(searchText)"
+                    md-item-text="item.mem_title"
+                    md-min-length="1"
+                    md-no-cache="true"
+                    md-autocomplete-snap="width"
+                    md-input-name="searchInput"
+                    placeholder="Поиск">
+                <md-item-template>
+                    <div class="row gap8 p8">
+                        <img class="img32 r4" ng-src="{{item.mem_image}}">
+                        <div class="col">
+                            <span class="text-white" md-highlight-text="searchText">{{ item.mem_title }}</span>
+                            <small class="text-gray">{{ item.user_name }}</small>
+                        </div>
+                    </div>
+                </md-item-template>
+                <md-not-found>
+                    <div class="text-gray p8">No matches found.</div>
+                </md-not-found>
+            </md-autocomplete>
+        </div>
+    </div>
+
+
+    <div class="col fill mt16 mh16 mb16">
+        <div class="row acc aec pv8 ph16 back-gray300 r16 w100p">
+            <div class="text4 bold">chat_id: {{activeChat.chat_id}}</div>
+        </div>
+        <div class="col scroll p16 gap8 flex pb16">
+
+            <div ng-repeat="msg in messages">
+
+                <div class="row" ng-if="msg.message_sender_user_id != user.user_id">
+                    <div class="back-gray300 text-white pv8 ph12 r16 mw400">
+                        {{msg.message_text}}
+                        <span class="text5 text-gray ml8">{{msg.message_timestamp}}
+            </span>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="msg.message_sender_user_id == user.user_id">
+                    <div class="back-purple text-white pv8 ph12 r16 mw400">
+                        {{msg.message_text}}
+                        <span class="text5 text-gray ml8">{{msg.message_timestamp}}
+            </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row aee gap16 pv8 ph16 back-gray300 r16 mb32">
+            <input type="text"
+                   placeholder="Сообщение"
+                   ng-model="message">
+            <div class="img32 r100 back-purple text-white text-center cursor" ng-click="new_message()">
+                <img src="/icon/mic.svg" class="img20">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
