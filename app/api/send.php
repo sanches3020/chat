@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/request.php';
 log_enable();
 
 $message_text = get_required("message_text");
@@ -19,7 +20,7 @@ insert("messages", [
     "message_text" => $message_text,
 ]);
 
-$receiver = select_one("users", ["user_id" => $message_reciever_user_id]);
+$receiver = row("users", ["user_id" => $message_reciever_user_id]);
 $chat_id = $receiver["user_telegram_chat_id"];
 $tg_token = getenv("TG_TOKEN");
 
@@ -31,4 +32,4 @@ if ($chat_id && $tg_token) {
 }
 
 $dialog = select("messages", ["message_dialog_id" => $message_dialog_id]);
-return_json($dialog);
+success($dialog);

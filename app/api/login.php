@@ -10,7 +10,7 @@ if (!$user) {
     error("Пользователь с таким Chat ID не найден");
 }
 
-return_json([
+success([
     "success" => true,
     "user_id" => $user["user_id"],
     "user_telegram_chat_id" => $user["user_telegram_chat_id"]

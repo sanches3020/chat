@@ -1,6 +1,6 @@
 app.controller('login', function ($scope, $http, $mdToast, $mdDialog) {
 
-    $scope.user_telegram_chat_id = ''
+    $scope.user_telegram_chat_id = '';
 
     $scope.close = function () {
         $mdDialog.hide()
@@ -23,7 +23,7 @@ app.controller('login', function ($scope, $http, $mdToast, $mdDialog) {
 
         }).catch(function (error) {
             $mdToast.show(
-                $mdToast.simple().textContent(error.data.message).hideDelay(3000)
+                $mdToast.simple().textContent(error.data.message || 'Ошибка входа').hideDelay(3000)
             )
         })
     }

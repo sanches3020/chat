@@ -8,4 +8,4 @@ $messages = select("messages", [
     "message_dialog_id" => $dialog_id
 ]);
 
-return_json($messages);
+success($messages);
