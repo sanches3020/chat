@@ -1,30 +1,23 @@
-app.controller('login', function ($scope, $http, $mdToast, $mdDialog) {
+app.controller('login', function ($scope, api, toast, cache, $mdDialog) {
 
     $scope.user_telegram_chat_id = '';
 
     $scope.close = function () {
-        $mdDialog.hide()
-    }
+        $mdDialog.hide();
+    };
 
-    $scope.enter = async function () {
-        $http.post("api/login.php", {
+    $scope.enter = function () {
+        api.post("api/login", {
             user_telegram_chat_id: $scope.user_telegram_chat_id,
-        }).then(function (response) {
+        }).then(function (data) {
 
-            localStorage.setItem("user_id", response.data.user_id)
-            localStorage.setItem("user_telegram_chat_id", $scope.user_telegram_chat_id)
+            cache.set("user_id", data.user_id);
+            cache.set("user_telegram_chat_id", $scope.user_telegram_chat_id);
 
-            $mdToast.show(
-                $mdToast.simple().textContent("Успешный вход").hideDelay(3000)
-            )
+            toast.success("Успешный вход");
 
-            $mdDialog.hide()
-            location.reload()
-
-        }).catch(function (error) {
-            $mdToast.show(
-                $mdToast.simple().textContent(error.data.message || 'Ошибка входа').hideDelay(3000)
-            )
-        })
-    }
-})
+            $mdDialog.hide();
+            location.reload();
+        });
+    };
+});

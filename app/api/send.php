@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/request.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/auth.php';
 log_enable();
 
 $message_text = get_required("message_text");
@@ -8,15 +9,10 @@ $message_dialog_id = get_required("message_dialog_id");
 $message_sender_user_id = get_required("message_sender_user_id");
 $message_reciever_user_id = get_required("message_reciever_user_id");
 
-$message_id = random_id();
-$message_timestamp = date("Y-m-d H:i:s");
-
 insert("messages", [
-    "message_id" => $message_id,
     "message_dialog_id" => $message_dialog_id,
     "message_sender_user_id" => $message_sender_user_id,
     "message_reciever_user_id" => $message_reciever_user_id,
-    "message_timestamp" => $message_timestamp,
     "message_text" => $message_text,
 ]);
 

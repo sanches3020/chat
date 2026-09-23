@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
-log_enable();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/auth.php';
 
 $user_id = get_required("user_id");
 

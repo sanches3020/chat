@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
-log_enable();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/auth.php';
 
 $dialog_id = get_required("dialog_id");
 
