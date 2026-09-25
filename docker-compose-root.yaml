@@ -1,0 +1,28 @@
+services:
+
+  proxy:
+    image: jc21/nginx-proxy-manager:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - ./nginx:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - global
+
+  docker:
+    image: amir20/dozzle:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - global
+
+
+networks:
+  global:
+    name: global
+    driver: bridge

@@ -1,5 +1,3 @@
-var app = angular.module('app', ['ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages']);
-
 app.controller('main', function ($scope, api, dialog) {
 
     function dialogId() {
@@ -15,7 +13,7 @@ app.controller('main', function ($scope, api, dialog) {
     $scope.loadMessages = function () {
         if (!$scope.user || !$scope.activeChat) return;
 
-        api.post("api/dialog", { dialog_id: dialogId() })
+        api.post("api/dialog", {dialog_id: dialogId()})
             .then(data => $scope.messages = data);
     };
 
@@ -37,12 +35,12 @@ app.controller('main', function ($scope, api, dialog) {
         const userId = localStorage.getItem("user_id");
         if (!userId) return;
 
-        api.post("api/users", { user_id: userId }).then(data => {
+        api.post("api/users", {user_id: userId}).then(data => {
             $scope.users = data;
             selectFirstChat();
         });
 
-        api.post("api/profile", { user_id: userId }).then(data => {
+        api.post("api/profile", {user_id: userId}).then(data => {
             $scope.user = data;
             selectFirstChat();
         });
