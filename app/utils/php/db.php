@@ -245,10 +245,10 @@ function get_order($order_by_default, $order_to_default = "DESC")
     }
 }
 
-function get_limits()
+function get_limits($size = 10, $page = 1)
 {
-    $page = get_long(page) ?: 1;
-    $size = get_long(size) ?: 10;
+    $page = get_long(page) ?: $page;
+    $size = get_long(size) ?: $size;
     if ($page != (int)$page || $page <= 0)
         error("Invalid page number");
     if ($size != (int)$size && !in_array($size, [10, 25, 50, 100, 199]))

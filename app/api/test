@@ -1,0 +1,4 @@
+http://chat.localhost/api/dialog_insert.php?user_id=123&dialog_title=wf
+http://chat.localhost/api/word_update.php?user_id=123&word=sdf&fix=fds
+http://chat.localhost/api/send.php?user_id=123&dialog_id=1&message_text=sdf%20sdf
+http://chat.localhost/api/dialog.php?user_id=123&dialog_id=1
