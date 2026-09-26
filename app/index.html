@@ -18,25 +18,34 @@
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="node_modules/angular-aria/angular-aria.min.js"></script>
     <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+
+    <script src="app.js"></script>
+
+    <script src="utils/js/material.js"></script>
     <script src="controller.js"></script>
     <script src="dialogs/login/controller.js"></script>
+    <script src="views/subs/controller.js"></script>
+    <script src="views/dialog/controller.js"></script>
+    <script src="views/market/controller.js"></script>
 </head>
 
 <body class="col back-black text-white fill" ng-app="app" ng-controller="main">
 
-<header class="row asc gap32 ph32 h64 fixed top back-black p8 fill-width text4">
-    <div class="row asc gap16 mob-hide">
+<div class="row asc ph32 h64 p8 text4">
+    <div class="row asc gap16">
         <span class="text-white bold uppercase">T69</span>
         <img src="/icon/" class="img30 cursor">
-        <button class="back-yellow text-black ph16 pv8 r16" ng-click=""> + </button>
+        <button class="back-yellow text-black ph16 pv8 r16" ng-click=""> +</button>
     </div>
-    <div class="flex col acc">
-    </div>
-    <div class="absolute bottom left right row acc gap32 pv8">
-        <div class="row acc img40 r100 cursor" ng-click=""></div>
-        <div class="row acc img40 r100 cursor" ng-click=""></div>
-        <div class="row acc img40 r100 cursor" ng-click=""></div>
-    </div>
+</div>
+
+<div ui-view class="flex col">
+</div>
+<div class="absolute bottom back-blue-10 r16 row acc gap32 pv8">
+    <div class="row acc img40 r100 cursor" ng-click=""></div>
+    <div class="row acc img40 r100 cursor" ng-click=""></div>
+    <div class="row acc img40 r100 cursor" ng-click=""></div>
 </div>
 </body>
 </html>

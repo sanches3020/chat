@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `dialogs`
+-- Структура таблицы `subs`
 --
 
 CREATE TABLE `dialogs` (
@@ -87,7 +87,7 @@ CREATE TABLE `users` (
 --
 
 --
--- Индексы таблицы `dialogs`
+-- Индексы таблицы `subs`
 --
 ALTER TABLE `dialogs`
     ADD PRIMARY KEY (`dialog_id`);
@@ -109,7 +109,7 @@ ALTER TABLE `messages`
 --
 
 --
--- AUTO_INCREMENT для таблицы `dialogs`
+-- AUTO_INCREMENT для таблицы `subs`
 --
 ALTER TABLE `dialogs`
     MODIFY `dialog_id` int(11) NOT NULL AUTO_INCREMENT;

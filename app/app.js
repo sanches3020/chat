@@ -2,15 +2,15 @@ var app = angular.module('app', ['ngMaterial', 'ngAnimate', 'ngAria', 'ngMessage
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
-        .state('home', {
-            url: '/home',
-            templateUrl: 'app/views/home/index.html',
-            controller: 'home',
+        .state('subs', {
+            url: '/subs',
+            templateUrl: 'app/views/subs/index.html',
+            controller: 'subs',
         })
-        .state('profile', {
-            url: '/profile',
-            templateUrl: 'views/profile/index.html',
-            controller: 'profile',
+        .state('market', {
+            url: '/market',
+            templateUrl: 'views/market/index.html',
+            controller: 'market',
         })
         .state('dialog', {
             url: '/dialog/:dialog_id',
@@ -18,7 +18,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'dialog',
         })
 
-    $urlRouterProvider.otherwise('/market')
+    $urlRouterProvider.otherwise('/subs')
 
     $locationProvider.hashPrefix('')
 })

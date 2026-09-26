@@ -13,7 +13,7 @@ if ($dialog_id == null) {
     $adjective = $adjectives[array_rand($adjectives)];
     $noun = $nouns[array_rand($nouns)];
 
-    $dialog_id = insert("dialogs", [
+    $dialog_id = insert("subs", [
         "dialog_title" => $adjective . ' ' . $noun,
     ]);
 }

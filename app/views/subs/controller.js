@@ -1,7 +1,7 @@
-app.controller('home', function ($scope, $state, api) {
+app.controller('subs', function ($scope, $state, api) {
 
     $scope.openDialog = function () {
-        $state.go('dialog', {
+        $state.go('subs', {
             dialog_id: 123
         })
     }
