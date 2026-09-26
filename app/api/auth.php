@@ -1,9 +1,21 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
 
-$user_hash = get_required("user_hash");
 
-$user = row("users", ["user_hash" => $user_hash]);
+$user_id = get_long_required("user_id");
 
-if ($user == null)
-    error("Неверный хеш");
+$user = row("users", ["user_id" => $user_id]);
+
+if ($user == null) {
+    require_once __DIR__ . '/user_names.php';
+    global $adjectives;
+    global $nouns;
+    $adjective = $adjectives[array_rand($adjectives)];
+    $noun = $nouns[array_rand($nouns)];
+
+    insert("users", [
+        "user_id" => $user_id,
+        "user_name" => $adjective . ' ' . $noun,
+        "user_image" => "wef.png",
+    ]);
+}
