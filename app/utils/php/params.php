@@ -12,7 +12,7 @@ if (isset($_SERVER["CONTENT_TYPE"]) && $_SERVER["CONTENT_TYPE"] != 'application/
 
 function println($msg, $data = null)
 {
-    return file_put_contents('php://stderr', gmdate("Y-m-d H:i:s") . " $msg " . ($data ? json_encode($data) : '') . "\n");
+    return file_put_contents('php://stderr', gmdate("Y-m-d H:i:s") . " params.php " . ($data ? json_encode($data) : '') . "\n");
 }
 
 function error($error_message, $data = null)

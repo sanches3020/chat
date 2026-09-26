@@ -1,4 +1,4 @@
-app.controller('main', function ($scope, api, dialog) {
+app.controller('main', function ($scope, api, dialog, toast) {
 
     function dialogId() {
         return [$scope.user.user_id, $scope.activeChat.user_id].sort().join(":");
@@ -9,7 +9,9 @@ app.controller('main', function ($scope, api, dialog) {
         var chat = $scope.users.find(u => u.user_id != $scope.user.user_id);
         if (chat) $scope.selectChat(chat);
     }
-
+    $scope.test = function (){
+            toast.error("нипральна")
+    }
     $scope.loadMessages = function () {
         if (!$scope.user || !$scope.activeChat) return;
 
@@ -46,17 +48,6 @@ app.controller('main', function ($scope, api, dialog) {
         });
     };
 
-    $scope.openLogin = function (event) {
-        dialog('login', 'dialogs/login', {}, event);
-    };
-
-    $scope.getMatches = function (searchText) {
-        var query = (searchText || '').toLowerCase();
-        return ($scope.users || []).filter(u =>
-            (!$scope.user || u.user_id != $scope.user.user_id) &&
-            String(u.user_name || '').toLowerCase().includes(query)
-        );
-    };
 
     $scope.selectChat = function (user) {
         if (!user || !$scope.user || user.user_id == $scope.user.user_id) return;

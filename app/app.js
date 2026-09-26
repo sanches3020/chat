@@ -4,7 +4,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: 'views/home/index.html',
+            templateUrl: 'app/views/home/index.html',
             controller: 'home',
         })
         .state('profile', {
@@ -14,11 +14,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         })
         .state('dialog', {
             url: '/dialog/:dialog_id',
-            templateUrl: 'views/dialog/index.html',
+            templateUrl: 'views/chats/index.html',
             controller: 'dialog',
         })
 
-    $urlRouterProvider.otherwise('/home')
+    $urlRouterProvider.otherwise('/market')
 
     $locationProvider.hashPrefix('')
 })

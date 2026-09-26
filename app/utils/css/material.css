@@ -1,0 +1,21 @@
+.md-toast-content {
+    text-wrap: auto;
+    line-height: 18px;
+}
+
+.green-toast .md-toast-content {
+    background: var(--green) !important;
+}
+
+.red-toast .md-toast-content {
+    background: var(--red) !important;
+}
+
+@media (max-width: 660px) {
+    .red-toast, .green-toast {
+        bottom: 0 !important;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
