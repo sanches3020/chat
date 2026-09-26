@@ -13,9 +13,11 @@ if ($user == null) {
     $adjective = $adjectives[array_rand($adjectives)];
     $noun = $nouns[array_rand($nouns)];
 
+    //error($adjective . ' ' . $noun);
     insert("users", [
         "user_id" => $user_id,
         "user_name" => $adjective . ' ' . $noun,
         "user_image" => "wef.png",
+        "user_balance" => 50,
     ]);
 }
