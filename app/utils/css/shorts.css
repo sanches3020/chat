@@ -109,7 +109,7 @@ body, html {
 }
 
 .bold {
-    font-weight: 600;
+    font-weight: 600; !important;
 }
 
 .italic {
@@ -666,6 +666,10 @@ body, html {
 
 .rd, .r16 {
     border-radius: 16px;
+}
+
+.r32 {
+    border-radius: 32px;
 }
 
 .r100 {

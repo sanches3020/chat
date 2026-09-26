@@ -1,0 +1,17 @@
+<div class="flex col">
+    <div class="row asc ph16 pv8 gap16 ripple"
+         ng-repeat="item in dialogs"
+         ng-click="openChat(item)">
+        <div class="r100"
+             ng-style="{'background-color': stringToColor(item.dialog_title)}">
+            <img class="img-white img32 m8" src="icon/avatar.svg">
+        </div>
+        <div class="flex col gap4">
+            <div class="text3 bold">{{item.dialog_title}}</div>
+            <div class="text4 text-gray">{{item.message_result}}</div>
+        </div>
+        <div class="col asc">
+            <div class="text-gray">{{formatTime(item.message_timestamp)}}</div>
+        </div>
+    </div>
+</div>

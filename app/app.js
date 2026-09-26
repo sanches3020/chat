@@ -1,20 +1,15 @@
 var app = angular.module('app', ['ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'ui.router'])
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $stateProvider
-        .state('dialogs', {
-            url: '/dialogs',
-            templateUrl: 'views/dialogs/index.html',
-            controller: 'dialogs',
-        })
         .state('dialog', {
             url: '/dialog/:dialog_id',
             templateUrl: 'views/dialog/index.html',
             controller: 'dialog',
         })
-        .state('subs', {
-            url: '/subs',
-            templateUrl: 'views/subs/index.html',
-            controller: 'subs',
+        .state('dialogs', {
+            url: '/dialogs',
+            templateUrl: 'views/dialogs/index.html',
+            controller: 'dialogs',
         })
         .state('market', {
             url: '/market',
@@ -23,4 +18,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         })
     $urlRouterProvider.otherwise('/dialogs')
     $locationProvider.hashPrefix('')
+
+    $httpProvider.interceptors.push(() => ({
+        request: (config) => {
+            config.headers = config.headers || {}
+            config.headers['token'] = localStorage.getItem('user_id')
+            return config
+        }
+    }))
 })
