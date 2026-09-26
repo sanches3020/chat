@@ -1,0 +1,34 @@
+<div class="col fill mh16 mv0">
+    <div class="row acc aec pv8 ph16 back-gray300 r16 w100p">
+        <div class="text4 bold">chat_id: {{user_telegram_chat_id}}</div>
+    </div>
+    <div class="col scroll p16 gap8 flex pb16">
+
+        <div ng-repeat="msg in messages">
+
+            <div class="row" ng-if="">
+                <div class="back-gray300 text-white pv8 ph12 r16 mw400">
+                    {{}}
+                    <span class="text5 text-gray ml8">{{}}
+            </span>
+                </div>
+            </div>
+            <div class="row" ng-if="">
+                <div class="back-purple text-white pv8 ph12 r16 mw400">
+                    {{msg.message_text}}
+                    <span class="text5 text-gray ml8">{{</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="row aee gap16 pv8 ph16 back-gray300 r16" ng-submit="new_message()">
+        <input type="text"
+               placeholder="Сообщение"
+               ng-model="message_text"
+               autocomplete="off">
+        <button type="submit" class="img32 r100 back-purple text-white text-center p0">
+            <img src="/icon/mic.svg" class="img20">
+        </button>
+    </form>
+</div>

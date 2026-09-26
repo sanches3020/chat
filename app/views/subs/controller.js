@@ -10,4 +10,6 @@ app.controller('subs', function ($scope, $state, api) {
     api.post('api/user', {user_id: 123}).then(function (result) {
         $scope.uesr = result.user
     })
+
+    $scope.subs = [{}]
 })
