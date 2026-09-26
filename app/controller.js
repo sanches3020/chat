@@ -12,7 +12,6 @@ app.controller('main', function ($scope, api, dialog, toast, $state) {
         $state.go(page)
     }
 
-
     $scope.menu = {
         dialogs: "Диалоги",
         market: "Маркет",

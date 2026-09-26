@@ -1,4 +1,4 @@
-app.service('toast', function ( $mdToast) {
+app.service('toast', function ($mdToast) {
     function showMessage(message, styleClass = 'red-toast') {
         if (message == null) message = 'Ошибка'
         let spaceCount = message.split(' ').length + 1
@@ -114,6 +114,17 @@ app.factory('dialog', function ($mdDialog) {
             locals: {
                 params: params || {}
             }
+        })
+    }
+})
+
+app.factory('sheet', function ($mdBottomSheet) {
+    return function (controller, template) {
+        return $mdBottomSheet.show({
+            templateUrl: template + "/index.html",
+            escapeToClose: false,
+            clickOutsideToClose: false,
+            controller: controller
         })
     }
 })

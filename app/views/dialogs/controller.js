@@ -8,8 +8,18 @@ app.controller('dialogs', function ($scope, $state, api, dialog) {
         }, event)
     }
 
-    api.post('api/dialogs').then(function (result) {
-        $scope.dialogs = result
-        $scope.openDialog($scope.dialogs[0].dialog_id)
-    })
+    $scope.reload = function () {
+        api.post('api/dialogs').then(function (result) {
+            $scope.dialogs = result
+        })
+    }
+
+    $scope.reload()
+
+    $scope.openInvite = function () {
+        dialog('invite', 'dialogs/invite').then(function (result) {
+
+        }).then($scope.reload)
+    }
+    swipeToRefresh()
 })

@@ -1,11 +1,21 @@
-<div class="col acc gap16">
-    <div class="row acc back-gray200 r16">
-        <input class="flex text-white ph16 pv8"
-               type="text"
-               placeholder="Название комнаты">
-        <button class="back-gray300 text-white img40 r16 cursor">+</button>
+<div class="dialog col">
+    <div class="row asc mb16">
+        <div class="flex bold text2">Приглашение</div>
+        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
     </div>
-    <button class="back-gray200 text-white ph32 pv8 r16 cursor">
-        Поделиться
-    </button>
+    <div class="flex"></div>
+    <div class="col gap16">
+        <div class="row relative">
+            <input class="flex ph16 pv8"
+                   ng-model="dialog_title"
+                   type="text"
+                   placeholder="Название комнаты">
+            <div class="absolute right p8 mr8 r16 ripple" ng-click="reload()">
+                <img class="img-white img24" src="icon/reload.svg">
+            </div>
+        </div>
+        <button ng-click="invite()">
+            Поделиться
+        </button>
+    </div>
 </div>
