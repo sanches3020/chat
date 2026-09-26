@@ -1,34 +1,27 @@
-<div class="col fill mh16 mv0">
-    <div class="row acc aec pv8 ph16 back-gray300 r16 w100p">
-        <div class="text4 bold">chat_id: {{user_telegram_chat_id}}</div>
+<div class="dialog col">
+    <div class="row asc mb16">
+        <div class="flex bold text2">{{dialog.dialog_title}}</div>
+        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
     </div>
-    <div class="col scroll p16 gap8 flex pb16">
-
-        <div ng-repeat="msg in messages">
-
-            <div class="row" ng-if="">
-                <div class="back-gray300 text-white pv8 ph12 r16 mw400">
-                    {{}}
-                    <span class="text5 text-gray ml8">{{}}
-            </span>
-                </div>
-            </div>
-            <div class="row" ng-if="">
-                <div class="back-purple text-white pv8 ph12 r16 mw400">
-                    {{msg.message_text}}
-                    <span class="text5 text-gray ml8">{{</span>
+    <div class="flex col col-reverse scroll p16 gap8 flex pb16">
+        <div ng-repeat="item in messages">
+            <div class="row">
+                <div class="back-gray300 pv8 ph12 r16 text5 ph8">
+                    {{item.message_text}}
                 </div>
             </div>
         </div>
     </div>
 
-    <form class="row aee gap16 pv8 ph16 back-gray300 r16" ng-submit="new_message()">
+    <form class="row asc gap8 pv8 ph16 back-gray300 r32"
+          ng-submit="send()">
         <input type="text"
                placeholder="Сообщение"
                ng-model="message_text"
-               autocomplete="off">
-        <button type="submit" class="img32 r100 back-purple text-white text-center p0">
-            <img src="/icon/mic.svg" class="img20">
+               autocomplete="off"
+               required>
+        <button type="submit" class="r100 p8">
+            <img class="img-white img24" src="/icon/send.svg">
         </button>
     </form>
 </div>

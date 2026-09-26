@@ -752,6 +752,10 @@ body, html {
     overflow-x: hidden;
 }
 
+.scroll-hidden {
+    overflow: hidden;
+}
+
 .mob-show {
     display: none !important;
 }

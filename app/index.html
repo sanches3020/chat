@@ -8,11 +8,11 @@
 
     <link rel="stylesheet" href="utils/css/colors-theme.css">
     <link rel="stylesheet" href="utils/css/colors.css">
-    <link rel="stylesheet" href="utils/css/shorts.css">
     <link rel="stylesheet" href="utils/css/base.css">
     <link rel="stylesheet" href="utils/css/animation.css">
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="utils/css/style.css">
+    <link rel="stylesheet" href="utils/css/shorts.css">
 
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-material/angular-material.min.js"></script>
@@ -27,20 +27,12 @@
     <script src="utils/js/formats.js"></script>
     <script src="controller.js"></script>
     <script src="dialogs/dialog/controller.js"></script>
-    <script src="dialogs/invitation/controller.js"></script>
-    <script src="views/subs/controller.js"></script>
+    <script src="dialogs/invite/controller.js"></script>
     <script src="views/dialogs/controller.js"></script>
 </head>
 
 <body class="col back-black text-white fill" ng-app="app" ng-controller="main">
 
-<div class="row asc ph32 h64 p8 text4 gap8">
-    <img class="img-white img20" src="icon/logo.svg">
-    <span class="text2">T69</span>
-    <div class="flex"></div>
-    <img class="img-white img20" src="icon/profile.svg">
-    {{formatPrice(user.user_balance)}}
-</div>
 
 <div ui-view class="flex col"></div>
 

@@ -129,7 +129,7 @@ function get($param_name)
 
 function check_required($param_name, $param_value)
 {
-    if ($param_value === null)
+    if ($param_value == null)
         error("$param_name is empty");
     return $param_value;
 }

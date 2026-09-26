@@ -1,7 +1,15 @@
 <div class="flex col">
+    <div class="row asc ph32 h64 p8 text4 gap8">
+        <img class="img-white img20" src="icon/logo.svg">
+        <span class="text2">T69</span>
+        <div class="flex"></div>
+        <img class="img-white img20" src="icon/profile.svg">
+        {{formatPrice(user.user_balance)}}
+    </div>
+
     <div class="row asc ph16 pv8 gap16 ripple"
          ng-repeat="item in dialogs"
-         ng-click="openChat(item)">
+         ng-click="openDialog(item.dialog_id, $event)">
         <div class="r100"
              ng-style="{'background-color': stringToColor(item.dialog_title)}">
             <img class="img-white img32 m8" src="icon/avatar.svg">
