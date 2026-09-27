@@ -120,8 +120,8 @@ function get($param_name)
         $param_value = $_COOKIE[$param_name];
     if ($param_value === null)
         $param_value = $_FILES[$param_name];
-    /*if ($param_value === null)
-        $param_value = array_change_key_case(getallheaders())[$param_name];*/
+    if ($param_value === null)
+        $param_value = array_change_key_case(getallheaders())[$param_name];
     if ($param_value === null)
         $param_value = $GLOBALS[$param_name];
     return $param_value;
@@ -129,7 +129,7 @@ function get($param_name)
 
 function check_required($param_name, $param_value)
 {
-    if ($param_value === null)
+    if ($param_value == null)
         error("$param_name is empty");
     return $param_value;
 }

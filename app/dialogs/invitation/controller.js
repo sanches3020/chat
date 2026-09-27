@@ -1,1 +1,0 @@
-app.controller('invitation', function ($scope, api, toast, $mdDialog, dialog) {}

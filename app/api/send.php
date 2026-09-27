@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/auth.php';
 
-$user_id = get_long_required("user_id");
-$message_text = get_string_required("message_text");
+$user_id = get_long_required("token");
 $dialog_id = get_long_required("dialog_id");
+$message_text = get_string_required("message_text");
 
 $words = explode(" ", $message_text);
 

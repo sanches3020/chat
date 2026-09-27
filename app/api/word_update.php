@@ -3,7 +3,7 @@ require_once __DIR__ . '/auth.php';
 
 $word = get_string_required("word");
 $fix = get_string_required("fix");
-$user_id = get_long_required("user_id");
+$user_id = get_long_required("token");
 
 $user = row("users", ["user_id" => $user_id]);
 
