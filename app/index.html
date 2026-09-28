@@ -39,9 +39,10 @@
 <div ui-view class="flex col"></div>
 
 <div class="row acc absolute bottom fill-width mb32">
-    <div class="row back-blue-10 acc r32 gap8 pv8 ph16">
-        <div class="col acc r32 back-blue-20 pv8 ph16 ripple"
+    <div class="row back-gray100 acc r32 gap8 pv8 ph16 anim d05">
+        <div class="col acc r32 pv8 ph16"
              ng-repeat="(key, val) in menu"
+             ng-class="{'back-blue-20': menu_selected == key}"
              ng-click="openPage(key)">
             <img class="img-white img16" src="icon/{{key}}.svg">
             {{val}}
