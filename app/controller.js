@@ -8,16 +8,18 @@ app.controller('main', function ($scope, api, dialog, toast, $state) {
         $scope.user = result
     })
 
-    $scope.openPage = function (page) {
-        $state.go(page)
-    }
-
     $scope.menu = {
         dialogs: "Диалоги",
         market: "Маркет",
         profile: "Баланс",
     }
 
+    $scope.menu_selected = 'dialogs'
+
+    $scope.openPage = function (page) {
+        $state.go(page)
+        $scope.menu_selected = page
+    }
 
 
 
