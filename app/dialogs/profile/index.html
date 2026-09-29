@@ -1,0 +1,45 @@
+<div class="col fill-height scroll">
+    <div class="text2 bold p16">Профиль</div>
+
+    <div class="col acc p16 gap8">
+        <div class="text0">{{formatPrice(user.user_balance)}}</div>
+        <div class="text5 text-gray">Баланс аккаунта</div>
+    </div>
+
+    <div class="row acc gap8 p16">
+        <button class="col acc flex p8 r16" ng-click="send()">
+            <img class="img-white img24" src="icon/send.svg">
+            <span class="text5">Отправить</span>
+        </button>
+        <button class="col acc flex p8 r16" ng-click="addFunds()">
+            <img class="img-white img24" src="icon/reload.svg">
+            <span class="text5">Пополнить</span>
+        </button>
+        <button class="col acc flex p8 r16" ng-click="swap()">
+            <img class="img-white img24" src="icon/market.svg">
+            <span class="text5">Обменять</span>
+        </button>
+    </div>
+
+    <div class="row asc ph16 pb8">
+        <div class="flex text3 bold">Активы</div>
+        <div class="text5 text-gray">Управление</div>
+    </div>
+
+    <div class="col ph16">
+        <div class="row asc gap8 pv12 border-bottom"
+             ng-repeat="asset in assets">
+            <div class="row acc r100 img40 back-accent">
+                <span class="bold text4">{{asset.symbol}}</span>
+            </div>
+            <div class="flex col gap4">
+                <div class="bold text4">{{asset.name}}</div>
+                <div class="text5 text-gray">{{asset.description}}</div>
+            </div>
+            <div class="col aec">
+                <div class="bold text4">{{asset.amount}}</div>
+                <div class="text5 text-gray">{{asset.value}}</div>
+            </div>
+        </div>
+    </div>
+</div>
