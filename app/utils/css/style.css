@@ -101,3 +101,9 @@ md-dialog {
 }
 
 
+
+a[title="Charting by TradingView"] {
+    display: none;
+}
+
+

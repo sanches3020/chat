@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/event_utils.php';
 
 $user_id = get_long_required("token");
 $dialog_id = get_long_required("dialog_id");
@@ -15,13 +16,15 @@ foreach ($words as $text_word) {
         $count = substr_count($message_result, $text_word);
         $message_likes += $count;
         $message_result = str_replace($text_word, $word["fix"], $message_result);
+        trackAccumulate($text_word, $count);
     }
 }
 
-if ($message_likes > 0)
+if ($message_likes > 0) {
     update("users", [
         "user_balance" => $message_likes,
     ], ["user_id" => $user_id]);
+}
 
 $message_id = insert("messages", [
     "user_id" => $user_id,

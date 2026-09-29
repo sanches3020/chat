@@ -1,5 +1,5 @@
 <md-dialog class="fill col">
-    <div class="row align-start-center p16 text1">
+    <div class="row asc p16 text1">
         <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="closeAll()">
             <img class="img16 img-gray400" src="./img/home.svg">
         </div>
@@ -11,36 +11,36 @@
             <img class="img16 img-gray400" src="./img/close.svg">
         </div>
     </div>
-    <div class="flex col scroll align-start-center">
+    <div class="flex col scroll asc">
         <div class="flex col block">
             <img class="refresh-icon img-gray" src="./img/close.svg">
             <div class="input-content" ng-show="domain != wallet.gas_domain">
                 <ng-include class="p0" src="'./profile/chart/chart.html?v=15'"></ng-include>
                 <div class="row">
-                    <div class="flex p16 col align-start-center ripple"
+                    <div class="flex p16 col asc ripple"
                          ng-click="openExchange(domain, refresh)">
                         <img class="img16 img-gray" src="./img/exchange.svg">
                         <p class="mt8 text2">{{str.swap}}</p>
                     </div>
-                    <div class="flex p16 col align-start-center ripple"
+                    <div class="flex p16 col asc ripple"
                          ng-show="isWrappedToken(token)"
                          ng-click="openDeposit(domain, refresh)">
                         <img class="img16 img-gray" src="./img/plus.svg">
                         <p class="mt8 text2">{{str.deposit}}</p>
                     </div>
-                    <div class="flex p16 col align-start-center ripple"
+                    <div class="flex p16 col asc ripple"
                          ng-show="isMiningToken(token)"
                          ng-click="openMiner(domain, refresh)">
                         <img class="img16 img-gray" src="./img/mining.svg">
                         <p class="mt8 text2">{{str.mining}}</p>
                     </div>
-                    <div class="flex p16 col align-start-center ripple"
+                    <div class="flex p16 col asc ripple"
                          ng-show="isCraftToken(token)"
                          ng-click="openRecipe(domain, refresh)">
                         <img class="img16 img-gray" src="./img/craft.svg">
                         <p class="mt8 text2">{{str.craft}}</p>
                     </div>
-                    <div class="flex p16 col align-start-center ripple"
+                    <div class="flex p16 col asc ripple"
                          ng-click="openSend(domain, null, null, refresh)">
                         <img class="img16 img-gray" src="./img/send.svg">
                         <p class="mt8 text2">{{str.send}}</p>
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <div class="col mh16 align-start-center" ng-show="account && domain == wallet.vavilon">
+    <div class="col mh16 asc" ng-show="account && domain == wallet.vavilon">
         <div class="row block">
             <div class="flex mh0 primary-button back-accent radius4 uppercase"
                  ng-click="openDividend(domain)">
@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <div class="col mh16 align-start-center" ng-show="account && domain != wallet.gas_domain && token.price != 0">
+    <div class="col mh16 asc" ng-show="account && domain != wallet.gas_domain && token.price != 0">
         <div class="row block gap16">
             <div class="flex mh0 primary-button back-green"
                  ng-click="openBuy(domain)"
@@ -157,7 +157,7 @@
         </div>
     </div>
 
-    <div class="col mh16 align-start-center" ng-show="!account">
+    <div class="col mh16 asc" ng-show="!account">
         <div class="row block">
             <div class="flex mh0 primary-button"
                  ng-click="addToWallet()">
@@ -166,7 +166,7 @@
         </div>
     </div>
 
-    <div class="col mh16 align-start-center" ng-show="account && token.price == 0">
+    <div class="col mh16 asc" ng-show="account && token.price == 0">
         <div class="row block">
             <div class="flex mh0 primary-button"
                  ng-click="openExchangeBot('liquidity', domain, 'exhibit tragic bundle galaxy zero lunch lift six access story round ', refresh)">
@@ -175,7 +175,7 @@
         </div>
     </div>
 
-    <div class="col mh16 align-start-center" ng-show="domain == wallet.gas_domain">
+    <div class="col mh16 asc" ng-show="domain == wallet.gas_domain">
         <div class="row block">
             <div class="flex mh0 primary-button"
                  ng-click="openSend(wallet.gas_domain, null, null, refresh)"

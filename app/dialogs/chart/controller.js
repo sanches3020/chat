@@ -54,11 +54,9 @@ function createChart(id) {
 }
 
 
-app.controller('chart', function ($scope, api, toast, dialog) {
+app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params) {
 
-    api.post("profile/chart").then(function () {
-        addChart($scope, $scope.app, $scope.key, $scope.accumulate_key)
-    })
+    addFormats($scope, $mdDialog)
 
     function init() {
         setTimeout(function () {
@@ -91,15 +89,52 @@ app.controller('chart', function ($scope, api, toast, dialog) {
         window.chartLoaded = true
     }
 
+    init()
+
     $scope.periods = ['M', 'H', 'D']
+    $scope.period_names = {
+        'M': 'M',
+        'H': 'Д',
+        'D': 'Г',
+    }
     $scope.period_name = "D"
     $scope.setPeriod = function (period_name) {
         $scope.period_name = period_name || $scope.period_name
-        api.post("api/candle_chart", {
+        api.post("api/event_chart", {
             key: 'wef',
             accumulate_key: 'wef',
             period_name: $scope.period_name
-        }, function (response) {
+        }).then(function (response) {
+            response = {
+                candles: [
+                    {
+                        time: 1774872000,
+                        open: 100.5,
+                        high: 105.2,
+                        low: 99.1,
+                        close: 103.4
+                    },
+                    {
+                        time: 1774958400,
+                        open: 103.4,
+                        high: 108.0,
+                        low: 102.5,
+                        close: 101.2
+                    }
+                ],
+                accumulate: [
+                    {
+                        time: 1774872000,
+                        value: 1500,
+                        color: '#45be88'
+                    },
+                    {
+                        time: 1774958400,
+                        value: 2100,
+                        color: '#45be88'
+                    }
+                ]
+            }
             if (response.candles != null) {
                 $scope.candleSeries.setData(response.candles)
                 for (const volume of response.accumulate) {
@@ -119,6 +154,12 @@ app.controller('chart', function ($scope, api, toast, dialog) {
         })
     }
 
+    api.post("api/fixes", {word: params.word}).then(function (response) {
+        $scope.fixes = response
+    })
 
-    init()
+    $scope.buy = function () {
+        $scope.close()
+    }
+
 })

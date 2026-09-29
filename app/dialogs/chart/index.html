@@ -1,36 +1,36 @@
-<div class="fill col">
-    <div class="row align-start-center p16 text1">
-        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="closeAll()">
-            <img class="img16 img-gray400" src="icon/home.svg">
+<div class="dialog col">
+    <div class="row asc mb16">
+        <div class="flex bold text2">График</div>
+        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
+    </div>
+    <div class="flex col scroll">
+        <img class="refresh-icon img-gray" src="icon/close.svg">
+        <div ng-if="showNoData"
+             class="row acc"
+             style="width: 100%; min-height: 270px; max-height: 270px;">
+            No data
         </div>
-        <div class="flex col align-center-center">
-            <p>{{formatDomain(domain)}}</p>
-            <p class="text2">График</p>
+        <div id="chart"
+             style="width: 100%; min-height: 270px; max-height: 270px;"
+             ng-if="!showNoData">
         </div>
-        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="close()">
-            <img class="img16 img-gray400" src="icon/close.svg">
+        <div class="row acc pv8">
+            <div class="row ph16 pv8 mh16"
+                 ng-repeat="period in periods"
+                 ng-class="{'back-gray rd': period == period_name}"
+                 ng-click="setPeriod(period)">
+                <p class="text4">{{period_names[period]}}</p>
+            </div>
+        </div>
+        <div class="row p16 asc ripple gap8 r8 anim"
+             ng-repeat="item in fixes"
+             ng-style="{'animation-delay': ($index * 0.02 + 0.2) + 's'}">
+            <p class="flex">{{item.word}}</p>
+            <p>=></p>
+            <p class="flex row aee">{{item.fix}}</p>
         </div>
     </div>
-    <div class="flex col scroll align-start-center">
-        <div class="flex col block">
-            <img class="refresh-icon img-gray" src="icon/close.svg">
-            <div ng-if="showNoData"
-                 class="row align-center-center"
-                 style="width: 100%; min-height: 270px; max-height: 270px;">
-                No data
-            </div>
-            <div id="chart"
-                 style="width: 100%; min-height: 270px; max-height: 270px;"
-                 ng-if="!showNoData">
-            </div>
-            <div class="row align-center pv8">
-                <div class="row ph16 pv8 mh16"
-                     ng-class="{'back-gray radius-default': period == period_name}"
-                     ng-repeat="period in periods"
-                     ng-click="setPeriod(period)">
-                    <p class="text2">{{str[period]}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button ng-click="buy()">
+        Купить
+    </button>
 </div>

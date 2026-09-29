@@ -17,4 +17,8 @@ app.controller('market', function ($scope, api, toast, dialog) {
     }
     $scope.reload()
 
+    /*setTimeout(function () {
+        $scope.openChart(response[0])
+    }, 3000)*/
+
 })

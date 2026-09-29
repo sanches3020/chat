@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
-
+success();
 $key = get_required("key");
 $period_name = get_required("period_name");
 
