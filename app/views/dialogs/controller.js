@@ -3,7 +3,7 @@ app.controller('dialogs', function ($scope, $state, api, dialog) {
     addFormats($scope)
 
     $scope.openDialog = function (dialog_id, event) {
-        dialog('dialog', 'dialogs/dialog', {
+        dialog('dialog', 'views/dialog', {
             dialog_id: dialog_id
         }, event)
     }
@@ -20,7 +20,7 @@ app.controller('dialogs', function ($scope, $state, api, dialog) {
     $scope.reload()
 
     $scope.openInvite = function () {
-        dialog('invite', 'dialogs/invite').then(function (result) {
+        dialog('invite', 'views/invite').then(function (result) {
 
         }).then($scope.reload)
     }

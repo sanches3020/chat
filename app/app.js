@@ -1,10 +1,10 @@
 var app = angular.module('app', ['ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'ui.router'])
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $stateProvider
-        .state('dialog', {
-            url: '/dialog/:dialog_id',
-            templateUrl: 'views/dialog/index.html',
-            controller: 'dialog',
+        .state('profile', {
+            url: '/profile',
+            templateUrl: 'views/profile/index.html',
+            controller: 'profile',
         })
         .state('dialogs', {
             url: '/dialogs',
@@ -16,6 +16,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
             templateUrl: 'views/market/index.html',
             controller: 'market',
         })
+
     $urlRouterProvider.otherwise('/dialogs')
     $locationProvider.hashPrefix('')
 

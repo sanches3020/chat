@@ -3,7 +3,7 @@ app.controller('market', function ($scope, api, toast, dialog) {
     addFormats($scope)
 
     $scope.openChart = function (item) {
-        dialog('chart', 'dialogs/chart', {
+        dialog('chart', 'views/chart', {
             word: item.word
         })
     }
