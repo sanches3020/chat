@@ -11,6 +11,9 @@ app.controller('dialogs', function ($scope, $state, api, dialog) {
     $scope.reload = function () {
         api.post('api/dialogs').then(function (result) {
             $scope.dialogs = result
+            /*dialog('chart', 'dialogs/chart', {
+
+            })*/
         })
     }
 
