@@ -11,7 +11,7 @@ function track($key, $value) {
 
     foreach ($periods as $name => $sec) {
         $period_time = floor($timestamp / $sec) * $sec;
-        $last = row("candles", ["key" => $key, "period" => $name, "time" => $period_time], get_order('time') . " limit 1");
+        $last = row("candles", ["key" => $key, "period" => $name, "time" => $period_time], get_order('time', 'desc') . " limit 1");
         if ($last == null) {
             insert("candles", [
                 "key" => $key,

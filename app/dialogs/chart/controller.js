@@ -46,16 +46,15 @@ function chartResize(tradeChart, chart) {
 }
 
 function createChart(id) {
-    var tradeChart = document.getElementById(id)
-    tradeChart.id = id + Math.floor(Math.random() * 10000)
-    var chart = LightweightCharts.createChart(tradeChart, getChartOptions())
-    chartResize(tradeChart, chart)
+    var element = document.getElementById(id)
+    element.id = id + Math.floor(Math.random() * 10000)
+    var chart = LightweightCharts.createChart(element, getChartOptions())
+    chartResize(element, chart)
     return chart
 }
 
 
 app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params) {
-
     addFormats($scope, $mdDialog)
 
     function init() {
@@ -70,19 +69,6 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
                     wickUpColor: '#45be88',
                     wickDownColor: '#FF3347'
                 })
-                $scope.accomulateSeries = chart.addHistogramSeries({
-                    color: '#45be88',
-                    priceFormat: {
-                        type: 'volume'
-                    },
-                    priceScaleId: ''
-                })
-                $scope.accomulateSeries.priceScale().applyOptions({
-                    scaleMargins: {
-                        top: 0.9,
-                        bottom: 0
-                    }
-                })
             }
             $scope.setPeriod($scope.period_name)
         }, !window.chartLoaded ? 300 : 0)
@@ -94,59 +80,26 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
     $scope.periods = ['M', 'H', 'D']
     $scope.period_names = {
         'M': 'M',
-        'H': 'Д',
-        'D': 'Г',
+        'H': 'Ч',
+        'D': 'Д',
     }
-    $scope.period_name = "D"
+    $scope.period_name = "M"
     $scope.setPeriod = function (period_name) {
         $scope.period_name = period_name || $scope.period_name
         api.post("api/event_chart", {
-            key: 'wef',
-            accumulate_key: 'wef',
+            key: 'btc',
             period_name: $scope.period_name
         }).then(function (response) {
-            response = {
-                candles: [
-                    {
-                        time: 1774872000,
-                        open: 100.5,
-                        high: 105.2,
-                        low: 99.1,
-                        close: 103.4
-                    },
-                    {
-                        time: 1774958400,
-                        open: 103.4,
-                        high: 108.0,
-                        low: 102.5,
-                        close: 101.2
+            if (response.length > 0) {
+                $scope.candleSeries.setData(response.map(i => {
+                    return {
+                        time: i.time,
+                        open: i.open,
+                        close: i.close,
+                        low: i.low,
+                        high: i.high,
                     }
-                ],
-                accumulate: [
-                    {
-                        time: 1774872000,
-                        value: 1500,
-                        color: '#45be88'
-                    },
-                    {
-                        time: 1774958400,
-                        value: 2100,
-                        color: '#45be88'
-                    }
-                ]
-            }
-            if (response.candles != null) {
-                $scope.candleSeries.setData(response.candles)
-                for (const volume of response.accumulate) {
-                    for (const candle of response.candles) {
-                        if (candle.time == volume.time) {
-                            if (candle.open > candle.close)
-                                volume.color = "#FF3347"
-                            break
-                        }
-                    }
-                }
-                $scope.accomulateSeries.setData(response.accumulate)
+                }))
                 $scope.showNoData = false
             } else {
                 $scope.showNoData = true

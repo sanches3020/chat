@@ -21,8 +21,9 @@ foreach ($words as $text_word) {
 }
 
 if ($message_likes > 0) {
+    $user = row("users", ["user_id" => $user_id]);
     update("users", [
-        "user_balance" => $message_likes,
+        "user_balance" => $user["user_balance"] + $message_likes,
     ], ["user_id" => $user_id]);
 }
 
