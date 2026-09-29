@@ -1,46 +1,29 @@
-<div class="col">
-    <div class="text2 bold p16">
-        Маркет
+<div class="flex col">
+    <div class="row asc m16">
+        <input type="text"
+               autocomplete="off"
+               oninput="this.value = this.value.toLowerCase().replace(/[^\p{L}0-9_]/gu, '')"
+               ng-model="search_text"
+               ng-change="reload()"
+               placeholder="Поиск слова...">
     </div>
-    <div class="ph16 pb16">
-        <md-autocomplete
-                class="fill-width"
-                md-selected-item="selectedItem"
-                md-search-text="searchText"
-                md-items="item in getMatches(searchText)"
-                md-item-text="item.mem_title"
-                md-min-length="0"
-                md-no-cache="true"
-                placeholder="Поиск">
-            <md-item-template>
-                <div class="row asc gap8 p8">
-                    <img class="img40 r8" ng-src="{{item.mem_image}}">
-                    <div class="flex">{{item.mem_title}}</div>
-                </div>
-            </md-item-template>
-        </md-autocomplete>
-    </div>
-    <div class="flex col scroll">
-        <div class="row asc gap16 ph16 pv12 border-bottom ripple"
-             ng-repeat="item in filteredMems"
-             ng-click="open(item)">
-            <img class="img48 r8"
-                 ng-src="{{item.mem_image}}">
-
-            <div class="flex col gap4">
-
-                <div class="bold text3">
-                    {{item.mem_title}}
-                </div>
-
-                <div class="text-gray text4">
-                    {{item.user_name}}
-                </div>
+    <div class="flex col scroll-vertical">
+        <div class="flex col ph8">
+            <div class="row p16 asc ripple gap8 r8 anim"
+                 ng-repeat="item in words"
+                 ng-click="openChart(item)"
+                 ng-style="{'animation-delay': ($index * 0.02) + 's'}">
+                <p class="flex">{{item.word}}</p>
+                <p class="row aee w80">{{formatPrice(item.price)}}</p>
+                <p class="row aee w80" ng-class="percentColor(item.price24)">
+                    {{formatPercent(token.price24)}}
+                </p>
             </div>
-            <div class="col aec">
-                <div class="bold text3">
-                    {{item.mem_price}}
-                </div>
+            <div class="col acc text-gray"
+                 ng-if="!words.length"
+                 style="height: 200px">
+                не найдено
             </div>
         </div>
     </div>
+</div>

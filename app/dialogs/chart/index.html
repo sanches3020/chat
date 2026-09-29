@@ -1,0 +1,36 @@
+<div class="fill col">
+    <div class="row align-start-center p16 text1">
+        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="closeAll()">
+            <img class="img16 img-gray400" src="icon/home.svg">
+        </div>
+        <div class="flex col align-center-center">
+            <p>{{formatDomain(domain)}}</p>
+            <p class="text2">График</p>
+        </div>
+        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="close()">
+            <img class="img16 img-gray400" src="icon/close.svg">
+        </div>
+    </div>
+    <div class="flex col scroll align-start-center">
+        <div class="flex col block">
+            <img class="refresh-icon img-gray" src="icon/close.svg">
+            <div ng-if="showNoData"
+                 class="row align-center-center"
+                 style="width: 100%; min-height: 270px; max-height: 270px;">
+                No data
+            </div>
+            <div id="chart"
+                 style="width: 100%; min-height: 270px; max-height: 270px;"
+                 ng-if="!showNoData">
+            </div>
+            <div class="row align-center pv8">
+                <div class="row ph16 pv8 mh16"
+                     ng-class="{'back-gray radius-default': period == period_name}"
+                     ng-repeat="period in periods"
+                     ng-click="setPeriod(period)">
+                    <p class="text2">{{str[period]}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

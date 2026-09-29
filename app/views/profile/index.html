@@ -1,0 +1,187 @@
+<md-dialog class="fill col">
+    <div class="row align-start-center p16 text1">
+        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="closeAll()">
+            <img class="img16 img-gray400" src="./img/home.svg">
+        </div>
+        <div class="flex col align-center-center">
+            <p>{{formatDomain(domain)}}</p>
+            <p ng-show="formatDomain(domain).toLowerCase() != domain" class="text2">{{domain}}</p>
+        </div>
+        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="close()">
+            <img class="img16 img-gray400" src="./img/close.svg">
+        </div>
+    </div>
+    <div class="flex col scroll align-start-center">
+        <div class="flex col block">
+            <img class="refresh-icon img-gray" src="./img/close.svg">
+            <div class="input-content" ng-show="domain != wallet.gas_domain">
+                <ng-include class="p0" src="'./profile/chart/chart.html?v=15'"></ng-include>
+                <div class="row">
+                    <div class="flex p16 col align-start-center ripple"
+                         ng-click="openExchange(domain, refresh)">
+                        <img class="img16 img-gray" src="./img/exchange.svg">
+                        <p class="mt8 text2">{{str.swap}}</p>
+                    </div>
+                    <div class="flex p16 col align-start-center ripple"
+                         ng-show="isWrappedToken(token)"
+                         ng-click="openDeposit(domain, refresh)">
+                        <img class="img16 img-gray" src="./img/plus.svg">
+                        <p class="mt8 text2">{{str.deposit}}</p>
+                    </div>
+                    <div class="flex p16 col align-start-center ripple"
+                         ng-show="isMiningToken(token)"
+                         ng-click="openMiner(domain, refresh)">
+                        <img class="img16 img-gray" src="./img/mining.svg">
+                        <p class="mt8 text2">{{str.mining}}</p>
+                    </div>
+                    <div class="flex p16 col align-start-center ripple"
+                         ng-show="isCraftToken(token)"
+                         ng-click="openRecipe(domain, refresh)">
+                        <img class="img16 img-gray" src="./img/craft.svg">
+                        <p class="mt8 text2">{{str.craft}}</p>
+                    </div>
+                    <div class="flex p16 col align-start-center ripple"
+                         ng-click="openSend(domain, null, null, refresh)">
+                        <img class="img16 img-gray" src="./img/send.svg">
+                        <p class="mt8 text2">{{str.send}}</p>
+                    </div>
+                </div>
+                <div class="row wrap gap8" ng-show="isAdmin()">
+                    <button ng-click="openExchangeBot('liquidity', domain, 'exhibit tragic bundle galaxy zero lunch lift six access story round ', refresh)">
+                        liquidity
+                    </button>
+                    <button ng-click="openExchangeBot('price pump bot', domain, 'exhibit tragic bundle galaxy zero lunch lift six access story pump ', refresh)">
+                        price pump bot
+                    </button>
+                    <button ng-click="openExchangeBot('liquidity pump bot', domain, 'exhibit tragic bundle future zero lunch lift six access story pump ', refresh)">
+                        liquidity pump bot
+                    </button>
+                    <button ng-click="openExchangeBot('self cost bot', domain, 'exhibit tragic bundle galaxy lunch zero lift six access story pump ', refresh)">
+                        self cost bot
+                    </button>
+                    <button ng-click="openExchangeBot('miner bot', domain, 'exhibit tragic bundle funny zero lunch lift six access story pump ', refresh)">
+                        miner bot
+                    </button>
+                    <button ng-click="openAirdropAdd(account.domain, refresh)">
+                        airdrop
+                    </button>
+                    <button ng-click="openLoader()">
+                        loader
+                    </button>
+                </div>
+                <div class="nowrap-disabled"
+                     ng-show="isCraftToken(token)"
+                     ng-include="'./launch/contracts/craft/' + getLanguage() + '.html'"></div>
+
+                <div class="nowrap-disabled"
+                     ng-show="isMiningToken(token)"
+                     ng-include="'./launch/contracts/mining/' + getLanguage() + '.html'"></div>
+
+                <div class="nowrap-disabled"
+                     ng-show="isSimpleToken(token)"
+                     ng-include="'./launch/contracts/simple/' + getLanguage() + '.html'"></div>
+
+                <div class="nowrap-disabled"
+                     ng-show="isWrappedToken(token)"
+                     ng-include="'./launch/contracts/wrapped/' + getLanguage() + '.html'"></div>
+
+                <div class="row gap8"
+                     ng-show="airdrop">
+                    <a class="back-gray radius-default img32 p8 hover-accent"
+                       href="https://t.me/{{airdrop.telegram}}">
+                        <img class="img16 img-white" src="./img/telegram.svg">
+                    </a>
+                    <!--<a class="back-gray radius-default img32 p8 hover-accent"
+                       href="https://github.com/mikefromminsk/mfm-token" target="_blank">
+                        <img class="img16 img-white" src="./img/git.svg">
+                    </a>-->
+                    <a class="back-gray radius-default img32 p8 hover-accent"
+                       href="/mfm-landing/docs/?doc=dev.md" target="_blank">
+                        <img class="img16" src="/storage/dev.png">
+                    </a>
+                    <a class="back-gray radius-default img32 p8 hover-accent"
+                       href="/mfm-landing/docs/?doc=whitepaper.md" target="_blank">
+                        <img class="img16" src="/storage/whitepaper.png">
+                    </a>
+                </div>
+            </div>
+
+            <ng-include src="'./profile/analytics.html?v=15'"></ng-include>
+            <ng-include src="'./profile/recommended.html?v=15'"></ng-include>
+
+            <div class="input-content">
+                <div class="col">
+                    <p class="text1 mt16 mb8">{{str.top_hodlers}}</p>
+                    <div class="row mt8 p16 radius-default back-gray ripple"
+                         ng-repeat="item in accounts"
+                         ng-click="copy(item.address)">
+                        <div class="radius-default back-black"
+                             ng-style="getIdenticon(item.address)"></div>
+                        <div class="col ml16">
+                            <p>{{formatAddress(item.address)}}</p>
+                            <!--<p class="mt4 text2 lowercase">
+                                {{formatSec(item.time)}}</p>-->
+                        </div>
+                        <div class="flex col align-start-end">
+                            <p>{{formatAmount(item.balance, item.domain)}}</p>
+                            <p class="mt4 text2">{{formatPrice(item.balance * item.token.price)}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col mh16 align-start-center" ng-show="account && domain == wallet.vavilon">
+        <div class="row block">
+            <div class="flex mh0 primary-button back-accent radius4 uppercase"
+                 ng-click="openDividend(domain)">
+                {{str.collect_gas}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col mh16 align-start-center" ng-show="account && domain != wallet.gas_domain && token.price != 0">
+        <div class="row block gap16">
+            <div class="flex mh0 primary-button back-green"
+                 ng-click="openBuy(domain)"
+                 ng-show="gas_account.balance != 0 || account.balance == 0">
+                {{str.buy}}
+            </div>
+            <div class="flex mh0 primary-button back-red"
+                 ng-click="openSell(domain)"
+                 ng-show="account.balance > 0">
+                {{str.sell}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col mh16 align-start-center" ng-show="!account">
+        <div class="row block">
+            <div class="flex mh0 primary-button"
+                 ng-click="addToWallet()">
+                {{str.add_to_wallet}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col mh16 align-start-center" ng-show="account && token.price == 0">
+        <div class="row block">
+            <div class="flex mh0 primary-button"
+                 ng-click="openExchangeBot('liquidity', domain, 'exhibit tragic bundle galaxy zero lunch lift six access story round ', refresh)">
+                {{str.add_liquidity}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col mh16 align-start-center" ng-show="domain == wallet.gas_domain">
+        <div class="row block">
+            <div class="flex mh0 primary-button"
+                 ng-click="openSend(wallet.gas_domain, null, null, refresh)"
+                 ng-disabled="account.balance == 0">
+                {{str.send}}
+            </div>
+        </div>
+    </div>
+</md-dialog>
