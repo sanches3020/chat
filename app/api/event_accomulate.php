@@ -2,8 +2,7 @@
 require_once __DIR__ . "/event_utils.php";
 
 $key = get_required("key");
-$value = get_number_required("value", 2);
 
-track($key, $value);
+trackAccumulate($key);
 
 success();

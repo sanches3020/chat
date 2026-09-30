@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Сен 26 2026 г., 13:56
+-- Время создания: Сен 30 2026 г., 16:28
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- База данных: `chat`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `candles`
+--
+
+CREATE TABLE `candles` (
+                           `id` int(11) NOT NULL,
+                           `key` varchar(255) COLLATE utf8_bin NOT NULL,
+                           `period` varchar(2) COLLATE utf8_bin NOT NULL,
+                           `time` int(11) NOT NULL,
+                           `low` double NOT NULL,
+                           `high` double NOT NULL,
+                           `open` double NOT NULL,
+                           `close` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -64,6 +81,18 @@ CREATE TABLE `messages` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `stats`
+--
+
+CREATE TABLE `stats` (
+                         `user_id` int(11) NOT NULL,
+                         `word` varchar(64) COLLATE utf8_bin NOT NULL,
+                         `amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `subs`
 --
 
@@ -101,6 +130,13 @@ CREATE TABLE `words` (
 --
 
 --
+-- Индексы таблицы `candles`
+--
+ALTER TABLE `candles`
+    ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `app_key_period_time` (`key`,`period`,`time`);
+
+--
 -- Индексы таблицы `dialogs`
 --
 ALTER TABLE `dialogs`
@@ -121,6 +157,12 @@ ALTER TABLE `words`
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `candles`
+--
+ALTER TABLE `candles`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `dialogs`

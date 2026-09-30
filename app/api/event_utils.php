@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
 function track($key, $value) {
     $timestamp = time();
     $periods = [
+        "S" => 1,
         "M" => 60,
         "H" => 3600,
         "D" => 86400
@@ -32,7 +33,7 @@ function track($key, $value) {
     }
 }
 
-function trackLast($key, $period = "D") {
+function chartValue($key, $period = "D") {
     $last = row("candles", ["key" => $key, "period" => $period], get_order('time') . " limit 1");
     if ($last != null)
         return $last["close"];
@@ -40,5 +41,10 @@ function trackLast($key, $period = "D") {
 }
 
 function trackAccumulate($key, $value = 1){
-    track("_" . $key, trackLast($value) + $value);
+    track($key, chartValue($key) + $value);
+}
+
+function chart($key, $period_name, $limit) {
+    $candles = select("candles", ["key" => $key, "period" => $period_name], get_order("time") . get_limits($limit));
+    return array_reverse($candles);
 }

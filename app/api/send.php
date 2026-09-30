@@ -10,13 +10,19 @@ $words = explode(" ", $message_text);
 
 $message_result = $message_text;
 $message_likes = 0;
-foreach ($words as $text_word) {
-    $word = row("words", ["word" => $text_word]);
-    if ($word != null) {
-        $count = substr_count($message_result, $text_word);
+foreach ($words as $word) {
+    $fix = row("words", ["word" => $word]);
+    if ($fix != null) {
+        $count = substr_count($message_result, $word);
         $message_likes += $count;
-        $message_result = str_replace($text_word, $word["fix"], $message_result);
-        trackAccumulate($text_word, $count);
+        $message_result = str_replace($word, $fix["fix"], $message_result);
+        trackAccumulate($word, $count);
+        $stat = row("stats", ["user_id" => $user_id, "word" => $word]);
+        if ($stat != null) {
+            update("stats", ["amount" => $stat["amount"] + $count], ["user_id" => $user_id, "word" => $word]);
+        } else {
+            insert("stats", ["user_id" => $user_id, "word" => $word, "amount" => $count]);
+        }
     }
 }
 

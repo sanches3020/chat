@@ -12,6 +12,25 @@ services:
     networks:
       - global
 
+
+  bot:
+    image: webdevops/php-apache:7.4
+    restart: always
+    command: php /app/api/bot.php
+    volumes:
+      - ./app:/app
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - APPLICATION_USER=www-data
+      - APPLICATION_GROUP=www-data
+    networks:
+      - global
+    depends_on:
+      - mysql
+
   app:
     image: webdevops/php-apache:7.4
     restart: always
