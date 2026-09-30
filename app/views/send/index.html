@@ -1,0 +1,20 @@
+<div class="dialog col">
+    <div class="row asc mb16">
+        <div class="flex bold text2">Отправить</div>
+        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
+    </div>
+    <div class="flex"></div>
+    <div class="col gap16">
+        <input class="flex ph16 pv8"
+               ng-model="recipient_id"
+               type="number"
+               placeholder="ID получателя">
+        <input class="flex ph16 pv8"
+               ng-model="amount"
+               type="number"
+               placeholder="Сумма">
+        <button ng-click="send()">
+            Отправить
+        </button>
+    </div>
+</div>

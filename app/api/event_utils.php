@@ -32,7 +32,7 @@ function track($key, $value) {
     }
 }
 
-function trackLast($key, $period = "D") {
+function chartValue($key, $period = "D") {
     $last = row("candles", ["key" => $key, "period" => $period], get_order('time') . " limit 1");
     if ($last != null)
         return $last["close"];
@@ -40,5 +40,5 @@ function trackLast($key, $period = "D") {
 }
 
 function trackAccumulate($key, $value = 1){
-    track("_" . $key, trackLast($value) + $value);
+    track("_" . $key, chartValue($value) + $value);
 }

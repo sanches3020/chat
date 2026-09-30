@@ -6,6 +6,6 @@ $value = get_required("value");
 
 track($key, $value);
 
-$response["last"] = trackLast($key);
+$response["last"] = chartValue($key);
 
 success($response);
