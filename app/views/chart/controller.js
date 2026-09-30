@@ -77,8 +77,9 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
 
     init()
 
-    $scope.periods = ['M', 'H', 'D']
+    $scope.periods = ['S', 'M', 'H', 'D']
     $scope.period_names = {
+        'S': 'C',
         'M': 'M',
         'H': 'Ч',
         'D': 'Д',
@@ -87,7 +88,7 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
     $scope.setPeriod = function (period_name) {
         $scope.period_name = period_name || $scope.period_name
         api.post("api/event_chart", {
-            key: 'btc',
+            key: params.word,
             period_name: $scope.period_name
         }).then(function (response) {
             if (response.length > 0) {
@@ -106,6 +107,12 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
             }
         })
     }
+
+    let interval = setInterval($scope.setPeriod, 1000)
+    $scope.$on('$destroy', function () {
+        clearInterval(interval)
+    })
+
 
     api.post("api/fixes", {word: params.word}).then(function (response) {
         $scope.fixes = response

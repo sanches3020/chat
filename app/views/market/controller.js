@@ -13,6 +13,8 @@ app.controller('market', function ($scope, api, toast, dialog) {
             search_text: $scope.search_text,
         }).then(function (response) {
             $scope.words = response
+
+            $scope.openChart($scope.words[0])
         })
     }
     $scope.reload()

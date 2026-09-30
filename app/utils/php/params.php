@@ -120,7 +120,7 @@ function get($param_name)
         $param_value = $_COOKIE[$param_name];
     if ($param_value === null)
         $param_value = $_FILES[$param_name];
-    if ($param_value === null)
+    if ($param_value === null && function_exists("getallheaders"))
         $param_value = array_change_key_case(getallheaders())[$param_name];
     if ($param_value === null)
         $param_value = $GLOBALS[$param_name];
