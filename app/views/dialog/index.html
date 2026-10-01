@@ -1,10 +1,12 @@
-<div class="dialog col">
-    <div class="row asc mb16">
+<div class="dialog flex col">
+    <div class="row asc p16">
         <div class="flex bold text2">{{dialog.dialog_title}}</div>
         <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
     </div>
     <div class="flex col col-reverse scroll p16 gap8 flex pb16">
-        <div ng-repeat="item in messages">
+        <div class=" anim-height"
+             ng-repeat="item in messages track by item.message_id"
+             ng-style="{'animation-delay': ($index * 0.02) + 's'}">
             <div class="row">
                 <div class="back-gray300 pv8 ph12 r16 text5 ph8">
                     {{item.message_text}}

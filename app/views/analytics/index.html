@@ -23,19 +23,7 @@
                     <p class="text4">{{period_names[period]}}</p>
                 </div>
             </div>
-            <div class="row p16 asc ripple gap8 r8 anim"
-                 ng-repeat="item in fixes"
-                 ng-style="{'animation-delay': ($index * 0.02 + 0.2) + 's'}">
-                <p class="flex">{{item.word}}</p>
-                <p>=></p>
-                <p class="flex row aee">{{item.fix}}</p>
-            </div>
             <div class="empty"></div>
         </div>
-    </div>
-    <div class="row p16">
-        <button class="flex" ng-click="buy()">
-            Купить
-        </button>
     </div>
 </div>

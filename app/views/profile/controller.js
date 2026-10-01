@@ -1,8 +1,20 @@
-app.controller('profile', function ($scope, api, dialog) {
+app.controller('profile', function ($scope, api, dialog, sheet) {
     addFormats($scope)
 
+    $scope.openChart = function (item, event) {
+        dialog('chart', 'views/chart', {word: item.word}, event)
+    }
+
     $scope.send = function (event) {
-        dialog('send', 'views/send', {}, event).then($scope.reload)
+        sheet('send', 'views/send', {}, event).then($scope.reload)
+    }
+
+    $scope.openEdit = function (item, event) {
+        localStorage.clear()
+    }
+
+    $scope.openAnalytics = function () {
+        dialog('analytics', 'views/analytics', {key: "app_start"})
     }
 
     $scope.reload = function () {

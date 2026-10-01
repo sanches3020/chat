@@ -19,6 +19,7 @@ app.service('toast', function ($mdToast) {
         showMessage(message, 'red-toast')
     }
 })
+
 app.service('api', function ($http, $q, toast) {
 
     function prepareUrl(url) {
@@ -110,6 +111,8 @@ app.factory('dialog', function ($mdDialog) {
             targetEvent: event || null,
             focusOnOpen: false,
             clickOutsideToClose: true,
+            fullscreen: true,
+            panelClass: 'dialog',
             multiple: true,
             locals: {
                 params: params || {}
@@ -122,8 +125,8 @@ app.factory('sheet', function ($mdBottomSheet) {
     return function (controller, template) {
         return $mdBottomSheet.show({
             templateUrl: template + "/index.html",
-            escapeToClose: false,
-            clickOutsideToClose: false,
+            escapeToClose: true,
+            clickOutsideToClose: true,
             controller: controller
         })
     }

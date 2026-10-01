@@ -1,45 +1,66 @@
-<div class="col fill-height scroll">
-    <div class="text2 bold p16">Профиль</div>
-
-    <div class="col acc p16 gap8">
-        <div class="text0">{{formatPrice(user.user_balance)}}</div>
-        <div class="text5 text-gray">Баланс</div>
+<div class="flex col">
+    <div class="row asc m16 text4">
+        <img class="img-white img32 ripple"
+             src="icon/edit.svg"
+             ng-click="openEdit()">
+        <div class="flex row acc">@user{{user.user_id}}</div>
+        <img class="img-red img32 rd ripple"
+             ui-sref="profile"
+             src="icon/like.svg">
     </div>
 
-    <div class="row acc gap16 p16">
-        <button class="col acc p8 r16 back-gray100" ng-click="addFunds()">
-            <img class="img-white img24" src="icon/qr.svg">
-            <span class="text5">Получить</span>
-        </button>
-        <button class="col acc p8 r16 back-gray100" ng-click="swap()">
-            <img class="img-white img24" src="icon/market.svg">
-            <span class="text5">Обменять</span>
-        </button>
-        <button class="col acc p8 r16 back-gray100" ng-click="send()">
-            <img class="img-white img24" src="icon/send.svg">
-            <span class="text5">Отправить</span>
-        </button>
-    </div>
+    <div class="flex col scroll">
+        <div class="flex col block">
+            <img class="refresh-icon img-gray" src="icon/reload.svg">
+            <div class="col anim d01">
+            {{users}}
+                <div class="col acc p16 gap8">
+                    <div class="text0">{{formatPrice(user.user_balance)}}</div>
+                    <div class="text5 text-gray" ng-click="openAnalytics()">Баланс</div>
+                </div>
 
-    <div class="row asc ph16 pb8">
-        <div class="flex text3 bold">Топ слов</div>
-        <div class="text5 text-gray">Статистика</div>
-    </div>
+                <div class="row acc gap16 p16">
+                    <button class="col acc p8 r16 back-gray100" ng-click="addFunds()">
+                        <img class="img-white img24" src="icon/qr.svg">
+                        <span class="text5">Получить</span>
+                    </button>
+                    <button class="col acc p8 r16 back-gray100" ng-click="swap()">
+                        <img class="img-white img24" src="icon/market.svg">
+                        <span class="text5">Обменять</span>
+                    </button>
+                    <button class="col acc p8 r16 back-gray100" ng-click="send()">
+                        <img class="img-white img24" src="icon/send.svg">
+                        <span class="text5">Отправить</span>
+                    </button>
+                </div>
 
-    <div class="col ph16">
-        <div class="row asc gap8 pv12 ripple pv8 r8"
-             ng-repeat="item in stats">
-            <div class="row acc r100 img40 back-accent">
-                <span class="bold text4">{{item.word[0]}}</span>
+                <div class="row asc ph16 pb8">
+                    <div class="flex text3 bold">Топ слов</div>
+                    <div class="text5 text-gray">Статистика</div>
+                </div>
+
             </div>
-            <div class="flex col gap4">
-                <div class="bold text4">{{item.word}}</div>
-                <div class="text5 text-gray">топ {{$index + 1}}</div>
+            <div class="col ph16">
+                <div class="row asc gap8 pv12 pv8 r8 anim"
+                     md-ink-ripple
+                     ng-repeat="item in stats track by item.word"
+                     ng-click="openChart(item, $event)"
+                     ng-style="{'animation-delay': ($index * 0.02) + 's'}">
+                    <div class="row acc r100 img40 back-accent">
+                        <span class="bold text4">{{item.word[0]}}</span>
+                    </div>
+                    <div class="flex col gap4">
+                        <div class="bold text4">{{item.word}}</div>
+                        <div class="text5 text-gray">топ {{$index + 1}}</div>
+                    </div>
+                    <div class="col aec m8">
+                        <div class="bold text4">{{formatCount(item.amount)}}</div>
+                        <div class="text5 text-gray">{{item.value}}</div>
+                    </div>
+                </div>
             </div>
-            <div class="col aec m8">
-                <div class="bold text4">{{formatCount(item.amount)}}</div>
-                <div class="text5 text-gray">{{item.value}}</div>
-            </div>
+
+            <div class="empty"></div>
         </div>
     </div>
 </div>

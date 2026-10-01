@@ -120,8 +120,10 @@ function get($param_name)
         $param_value = $_COOKIE[$param_name];
     if ($param_value === null)
         $param_value = $_FILES[$param_name];
-    if ($param_value === null && function_exists("getallheaders"))
-        $param_value = array_change_key_case(getallheaders())[$param_name];
+    if ($param_value === null && function_exists('getallheaders')) {
+        $headers = array_change_key_case(getallheaders());
+        $param_value = $headers[strtolower($param_name)] ?? null;
+    }
     if ($param_value === null)
         $param_value = $GLOBALS[$param_name];
     return $param_value;
@@ -351,7 +353,8 @@ function log_enable()
     error_reporting(E_ALL & ~E_WARNING & ~E_USER_WARNING & ~E_NOTICE & ~E_USER_NOTICE);
 }
 
-function trunc(float $number, int $places = 1): float {
+function trunc(float $number, int $places = 1): float
+{
     $power = 10 ** $places;
     return floor($number * $power) / $power;
 }

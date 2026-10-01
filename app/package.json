@@ -1,11 +1,13 @@
 {
   "dependencies": {
+    "@types/telegram-web-app": "^10.1.0",
     "@uirouter/angularjs": "^1.1.2",
     "angular": "^1.8.2",
     "angular-animate": "^1.8.2",
     "angular-aria": "^1.8.2",
     "angular-material": "^1.2.5",
     "crypto-js": "^4.2.0",
-    "lightweight-charts": "^4.2.2"
+    "lightweight-charts": "^4.2.2",
+    "remove": "^0.1.5"
   }
 }

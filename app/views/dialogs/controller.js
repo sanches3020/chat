@@ -1,5 +1,4 @@
 app.controller('dialogs', function ($scope, $state, api, dialog) {
-
     addFormats($scope)
 
     $scope.openDialog = function (dialog_id, event) {
@@ -24,5 +23,4 @@ app.controller('dialogs', function ($scope, $state, api, dialog) {
 
         }).then($scope.reload)
     }
-    swipeToRefresh()
 })

@@ -225,6 +225,8 @@ function addFormats($scope, $mdDialog) {
             $scope.page = pageIndex
         }
     }
+
+    swipeToRefresh()
 }
 
 function clone(array) {

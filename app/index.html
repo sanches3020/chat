@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Мем чат</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="icon/img/logo.svg?v=80">
+    <link rel="icon" type="image/svg+xml" href="icon/logo.svg?v=80">
 
     <link rel="stylesheet" href="utils/css/colors-theme.css">
     <link rel="stylesheet" href="utils/css/colors.css">
@@ -21,6 +21,7 @@
     <script src="node_modules/angular-messages/angular-messages.min.js"></script>
     <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
     <script src="node_modules/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="utils/js/telegram-web-app.js?63"></script>
 
     <script src="app.js"></script>
 
@@ -35,6 +36,8 @@
     <script src="views/profile/controller.js"></script>
     <script src="views/chart/controller.js"></script>
     <script src="views/send/controller.js"></script>
+    <script src="views/fix/controller.js"></script>
+    <script src="views/analytics/controller.js"></script>
 </head>
 
 <body class="col back-black text-white fill" ng-app="app" ng-controller="main">
@@ -42,13 +45,15 @@
 <div ui-view class="flex col"></div>
 
 <div class="row acc absolute bottom fill-width mb32">
-    <div class="row back-gray100 acc r32 gap8 pv8 ph16 anim d05">
-        <div class="col acc r32 pv8 ph16"
+    <div class="row back-gray100 acc r32 gap8 pv8 ph16 anim d05 menu-container" style="position: relative; z-index: 1;">
+        <div class="nav-indicator"></div>
+        <div class="col acc r32 pv8 ph16 menu-item"
              ng-repeat="(key, val) in menu"
-             ng-class="{'back-blue-20': menu_selected == key}"
+             data-key="{{key}}"
+             ng-class="{'is-active': menu_selected == key}"
              ng-click="openPage(key)">
             <img class="img-white img16" src="icon/{{key}}.svg">
-            {{val}}
+            <span>{{val}}</span>
         </div>
     </div>
 </div>

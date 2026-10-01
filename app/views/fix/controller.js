@@ -1,4 +1,4 @@
-app.controller('replace', function ($scope, api, toast, $mdDialog) {
+app.controller('fix', function ($scope, api, toast, $mdDialog) {
 
     addFormats($scope, $mdDialog)
 

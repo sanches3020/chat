@@ -1,16 +1,19 @@
 <div class="flex col">
-    <div class="row asc ph32 h64 p8 text4 gap8 anim d01" style="transition-delay: 1s;">
-        <img class="img-white img20" src="icon/logo.svg">
-        <span class="text2">T69</span>
-        <div class="flex"></div>
-        <img class="img-white img20" src="icon/profile.svg">
-        {{formatPrice(user.user_balance)}}
+    <div class="row asc m16 text2">
+        <img class="img-white img32 rd ripple"
+             src="icon/plus.svg"
+             ng-click="openInvite()">
+        <div class="flex row acc">Harmy</div>
+        <img class="img-red img32 rd ripple"
+             ui-sref="profile"
+             src="icon/like.svg">
     </div>
     <div class="flex col scroll">
         <div class="flex col block">
             <img class="refresh-icon img-gray" src="icon/reload.svg">
-            <div class="row ph16 pv8 gap16 ripple anim"
-                 ng-repeat="item in dialogs"
+            <div class="row ph16 pv8 gap16 anim"
+                 md-ink-ripple
+                 ng-repeat="item in dialogs track by item.dialog_id"
                  ng-click="openDialog(item.dialog_id, $event)"
                  ng-style="{'animation-delay': ($index * 0.02) + 's'}">
                 <div class="r100"
@@ -25,7 +28,7 @@
                     <div>{{formatTime(item.message_timestamp)}}</div>
                 </div>
             </div>
+            <div class="empty"></div>
         </div>
     </div>
-    <button class="text5 p0 w80 r100 fixed right mr16" style="bottom: 96px;" ng-click="openInvite()">+</button>
 </div>

@@ -53,6 +53,17 @@ function createChart(id) {
     return chart
 }
 
+function seriesOptions() {
+    return {
+        upColor: '#45be88',
+        downColor: '#FF3347',
+        borderUpColor: '#45be88',
+        borderDownColor: '#FF3347',
+        wickUpColor: '#45be88',
+        wickDownColor: '#FF3347'
+    }
+}
+
 
 app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params) {
     addFormats($scope, $mdDialog)
@@ -61,14 +72,7 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
         setTimeout(function () {
             if ($scope.candleSeries == null) {
                 let chart = createChart("chart")
-                $scope.candleSeries = chart.addCandlestickSeries({
-                    upColor: '#45be88',
-                    downColor: '#FF3347',
-                    borderUpColor: '#45be88',
-                    borderDownColor: '#FF3347',
-                    wickUpColor: '#45be88',
-                    wickDownColor: '#FF3347'
-                })
+                $scope.candleSeries = chart.addCandlestickSeries(seriesOptions())
             }
             $scope.setPeriod($scope.period_name)
         }, !window.chartLoaded ? 300 : 0)
