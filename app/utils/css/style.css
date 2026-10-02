@@ -102,4 +102,9 @@ md-bottom-sheet {
     color: var(--white);
     border-top-width: 0;
     box-shadow: 4px 0 4px rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+md-backdrop.md-bottom-sheet-backdrop {
+    z-index: 99;
 }
