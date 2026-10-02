@@ -2,7 +2,7 @@
     <div class="row asc m16 text2">
         <img class="img-white img32 rd ripple"
              src="icon/plus.svg"
-             ng-click="openInvite()">
+             ng-click="openInvite($event)">
         <div class="flex row acc">Harmy</div>
         <img class="img-red img32 rd ripple"
              ui-sref="profile"
@@ -11,7 +11,7 @@
     <div class="flex col scroll">
         <div class="flex col block">
             <img class="refresh-icon img-gray" src="icon/reload.svg">
-            <div class="row ph16 pv8 gap16 anim"
+            <div class="row ph16 pv8 gap16 anim-height"
                  md-ink-ripple
                  ng-repeat="item in dialogs track by item.dialog_id"
                  ng-click="openDialog(item.dialog_id, $event)"
