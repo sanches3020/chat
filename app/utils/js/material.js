@@ -102,6 +102,42 @@ app.service('api', function ($http, $q, toast) {
 
 })
 
+
+app.factory('loader', function (api) {
+    return function (scope) {
+        var wrap = function (promise) {
+            scope.in_progress = true
+            return promise.finally(function () {
+                scope.in_progress = false
+            })
+        }
+
+        return {
+            get: function () {
+                return wrap(api.get.apply(api, arguments))
+            },
+            post: function () {
+                return wrap(api.post.apply(api, arguments))
+            },
+            postSilent: function () {
+                return wrap(api.postSilent.apply(api, arguments))
+            },
+            update: function () {
+                return wrap(api.post.apply(api, arguments).then(function (response) {
+                    api.success()
+                    return response
+                }))
+            },
+            all: function () {
+                return wrap(api.all.apply(api, arguments))
+            },
+            upload: function () {
+                return wrap(api.upload.apply(api, arguments))
+            },
+        }
+    }
+})
+
 app.factory('dialog', function ($mdDialog) {
     return function (controller, template, params, event) {
 
@@ -112,7 +148,6 @@ app.factory('dialog', function ($mdDialog) {
             focusOnOpen: false,
             clickOutsideToClose: true,
             fullscreen: true,
-            panelClass: 'dialog',
             multiple: true,
             locals: {
                 params: params || {}

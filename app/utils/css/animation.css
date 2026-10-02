@@ -58,11 +58,21 @@
     }
     100% {
         opacity: 1;
-        max-height: 150px;
+        max-height: 400px;
     }
 }
 .anim-height {
     animation: height-animation 1s ease both;
+}
+
+@keyframes like-pop {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.like-count {
+    animation: like-pop 0.4s ease 1s both;
 }
 
 .d01 { animation-delay: 0.1s }
