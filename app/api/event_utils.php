@@ -1,7 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
 
-function track($key, $value) {
+function track($key, $value)
+{
     $timestamp = time();
     $periods = [
         "S" => 1,
@@ -33,26 +34,42 @@ function track($key, $value) {
     }
 }
 
-function chartValue($key, $period = "D") {
+function chartValue($key, $period = "D")
+{
     $last = row("candles", ["key" => $key, "period" => $period], get_order('time') . " limit 1");
     if ($last != null)
         return $last["close"];
     return 0;
 }
 
-function balanceKey($user_id) {
+function balanceKey($user_id)
+{
     return "balance_" . $user_id;
 }
 
-function trackBalance($user_id, $balance) {
+function trackBalance($user_id, $balance)
+{
     track(balanceKey($user_id), $balance);
 }
 
-function trackAccumulate($key, $value = 1){
+function trackAccumulate($key, $value = 1)
+{
     track($key, chartValue($key) + $value);
 }
 
-function chart($key, $period_name, $limit) {
+function chart($key, $period_name, $limit)
+{
     $candles = select("candles", ["key" => $key, "period" => $period_name], get_order("time") . get_limits($limit));
     return array_reverse($candles);
+}
+
+function change24($key)
+{
+    $chart = chart($key, "D", 2);
+    if (sizeof($chart) == 1)
+        return ($chart[0]["close"] - $chart[0]["open"]) / $chart[0]["close"];
+    if (sizeof($chart) == 2) {
+        return ($chart[0]["close"] - $chart[1]["open"]) / $chart[0]["close"];
+    }
+    return 0;
 }
