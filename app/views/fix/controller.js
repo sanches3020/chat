@@ -1,6 +1,6 @@
 app.controller('fix', function ($scope, api, toast, $mdBottomSheet) {
-
     addFormats($scope)
+
 
     $scope.close = function () {
         $mdBottomSheet.hide()
@@ -10,12 +10,6 @@ app.controller('fix', function ($scope, api, toast, $mdBottomSheet) {
     $scope.loading = false
 
     $scope.replace = function () {
-        if (!$scope.word || !$scope.fix || $scope.loading) {
-            return
-        }
-
-        $scope.loading = true
-
         api.post('api/word_update', {
             word: $scope.word.trim(),
             fix: $scope.fix.trim(),

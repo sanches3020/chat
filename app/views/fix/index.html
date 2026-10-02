@@ -1,34 +1,24 @@
 <md-bottom-sheet>
-    <div class="col gap16">
+    <form class="col gap32 pb32 pt16" ng-submit="replace()">
         <div class="row asc">
             <div class="flex bold text2">Добавить</div>
             <img class="img-white img30 ripple r16" src="icon/close.svg" ng-click="close()">
         </div>
 
         <div class="col gap8">
-            <input class="ph8 pv4 text5 back-gray300"
-                   style="height: 40px; line-height: 40px;"
-                   type="text"
+            <input type="text"
                    ng-model="word"
+                   required
                    placeholder="Изначальное слово">
-            <input class="ph8 pv4 text5 back-gray300"
-                   style="height: 40px; line-height: 40px;"
-                   type="text"
+            <input type="text"
                    ng-model="fix"
+                   required
                    placeholder="Слово для замены">
         </div>
 
-        <div class="row asc text5 text-gray">
-            <span>Стоимость</span>
-            <div class="flex"></div>
-            <span>50 монет</span>
-        </div>
-
-        <button class="fill-width text4 ph8 pv4 r32 back-accent"
-                style="height: 48px; min-height: 48px;"
-                ng-click="replace()">
+        <button type="submit"
+                ng-disabled="in_progress">
             Купить за 50 монет
         </button>
-    </div>
+    </form>
 </md-bottom-sheet>
-

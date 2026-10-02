@@ -65,7 +65,7 @@ function seriesOptions() {
 }
 
 
-app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params) {
+app.controller('chart', function ($scope, api, toast, $mdDialog, sheet, params) {
     addFormats($scope, $mdDialog)
 
     $scope.word = params.word
@@ -133,7 +133,7 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
     })
 
     $scope.buy = function () {
-        $scope.close()
+        sheet('fix', 'views/fix', {})
     }
 
 })
