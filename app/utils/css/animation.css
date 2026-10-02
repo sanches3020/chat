@@ -1,10 +1,10 @@
-*,
+/**,
 *::before,
 *::after {
     transition-property: background-color;
     transition-duration: .4s;
     transition-timing-function: ease;
-}
+}*/
 
 .ripple:active {
     background-color: var(--gray100);
@@ -21,30 +21,9 @@
     opacity: 0;
 }
 
-.ng-leave {
-    display: none !important;
+.fade.ng-leave {
+    display: none;
 }
-
-@keyframes animation {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-.anim {
-    animation: animation 1s ease both;
-}
-.d01 { animation-delay: 0.1s }
-.d03 { animation-delay: 0.3s }
-.d05 { animation-delay: 0.5s }
-.d1 { animation-delay: 1s }
-.d15 { animation-delay: 1.5s }
-.d2 { animation-delay: 2s }
-.d25 { animation-delay: 2.5s }
-.d3 { animation-delay: 3s }
-
-
-
-
-
 
 .fade.ng-hide {
     opacity: 0;
@@ -63,3 +42,75 @@
     transition: all linear 200ms;
 }
 
+
+@keyframes enter-animation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.anim {
+    animation: enter-animation 1s ease both;
+}
+
+@keyframes height-animation {
+    0% {
+        opacity: 0;
+        max-height: 0;
+    }
+    100% {
+        opacity: 1;
+        max-height: 400px;
+    }
+}
+.anim-height {
+    animation: height-animation 1s ease both;
+}
+
+@keyframes like-pop {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.like-count {
+    animation: like-pop 0.4s ease 1s both;
+}
+
+.d01 { animation-delay: 0.1s }
+.d03 { animation-delay: 0.3s }
+.d05 { animation-delay: 0.5s }
+.d1 { animation-delay: 1s }
+.d15 { animation-delay: 1.5s }
+.d2 { animation-delay: 2s }
+.d25 { animation-delay: 2.5s }
+.d3 { animation-delay: 3s }
+
+
+
+
+
+
+
+
+
+*[md-ink-ripple] {
+    position: relative;
+}
+
+
+.menu-item {
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+}
+.nav-indicator {
+    position: absolute;
+    z-index: 2;
+    top: 8px;
+    bottom: 8px;
+    left: var(--indicator-left, 16px);
+    width: var(--indicator-width, 0px);
+    background-color: rgba(0, 123, 255, 0.2);
+    border-radius: 32px;
+    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+}

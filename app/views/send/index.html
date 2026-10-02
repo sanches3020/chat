@@ -1,20 +1,34 @@
-<div class="dialog col">
-    <div class="row asc mb16">
-        <div class="flex bold text2">Отправить</div>
-        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
-    </div>
-    <div class="flex"></div>
-    <div class="col gap16">
-        <input class="flex ph16 pv8"
-               ng-model="recipient_id"
-               type="number"
-               placeholder="ID получателя">
-        <input class="flex ph16 pv8"
-               ng-model="amount"
-               type="number"
-               placeholder="Сумма">
-        <button ng-click="send()">
+<md-bottom-sheet>
+    <form class="col gap16" name="form" ng-submit="send()">
+        <div class="row asc text2">
+            <div class="flex row">Отправить</div>
+            <img class="img-white img32 rd ripple" ng-click="close()" src="icon/close.svg">
+        </div>
+
+        <div class="row gap8 relative">
+            <input ng-model="recipient_id"
+                   placeholder="@user123456789"
+                   style="padding-right: 100px;"
+                   required>
+            <button type="button"
+                    class="absolute right bottom text5 text-gray back-gray100"
+                    style="height: 28px; min-height: 28px; margin: 6px;"
+                    ng-click="pasteRecipient()">
+                Вставить
+            </button>
+        </div>
+
+        <input ng-model="amount"
+               decimal-numbers="2"
+               placeholder="Сумма"
+               required>
+
+        <div class="row asc text5 text-gray">
+            <span>Баланс {{formatPrice(user.user_balance)}}</span>
+        </div>
+
+        <button type="submit" ng-disabled="in_progress || form.$invalid">
             Отправить
         </button>
-    </div>
-</div>
+    </form>
+</md-bottom-sheet>

@@ -724,6 +724,12 @@ body, html {
     top: 0;
 }
 
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .bottom {
     bottom: 0;
 }

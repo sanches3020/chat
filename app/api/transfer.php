@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/event_utils.php';
 
 $user_id = get_long_required("token");
 $recipient_id = get_long_required("recipient_id");
@@ -21,5 +22,8 @@ if (!$recipient)
 
 update("users", ["user_balance" => $sender["user_balance"] - $amount], ["user_id" => $user_id]);
 update("users", ["user_balance" => $recipient["user_balance"] + $amount], ["user_id" => $recipient_id]);
+
+trackBalance($user_id, $sender["user_balance"] - $amount);
+trackBalance($recipient_id, $recipient["user_balance"] + $amount);
 
 success();

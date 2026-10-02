@@ -1,0 +1,29 @@
+<div class="dialog col">
+    <div class="row asc p16">
+        <div class="flex bold text2">График</div>
+        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
+    </div>
+    <div class="flex col scroll">
+        <div class="flex col block">
+            <img class="refresh-icon img-gray" src="icon/reload.svg">
+            <div ng-if="showNoData"
+                 class="row acc"
+                 style="width: 100%; min-height: 270px; max-height: 270px;">
+                Нет данных
+            </div>
+            <div id="chart"
+                 style="width: 100%; min-height: 270px; max-height: 270px;"
+                 ng-if="!showNoData">
+            </div>
+            <div class="row acc pv8">
+                <div class="row ph16 pv8 mh16"
+                     ng-repeat="period in periods"
+                     ng-class="{'back-gray rd': period == period_name}"
+                     ng-click="setPeriod(period)">
+                    <p class="text4">{{period_names[period]}}</p>
+                </div>
+            </div>
+            <div class="empty"></div>
+        </div>
+    </div>
+</div>

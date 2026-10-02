@@ -5,25 +5,27 @@
                oninput="this.value = this.value.toLowerCase().replace(/[^\p{L}0-9_]/gu, '')"
                ng-model="search_text"
                ng-change="reload()"
-               placeholder="Поиск слова...">
+               placeholder="Поиск...">
     </div>
-    <div class="flex col scroll-vertical">
-        <div class="flex col ph8">
-            <div class="row p16 asc ripple gap8 r8 anim"
-                 ng-repeat="item in words"
-                 ng-click="openChart(item)"
+    <div class="flex col scroll">
+        <div class="flex col block">
+            <img class="refresh-icon img-gray" src="icon/reload.svg">
+            <div class="row p16 asc gap8 r8 anim"
+                 md-ink-ripple
+                 ng-repeat="item in words track by item.word"
+                 ng-click="openChart(item, $event)"
                  ng-style="{'animation-delay': ($index * 0.02) + 's'}">
                 <p class="flex">{{item.word}}</p>
                 <p class="row aee w80">{{formatPrice(item.price)}}</p>
                 <p class="row aee w80" ng-class="percentColor(item.price24)">
-                    {{formatPercent(token.price24)}}
+                    {{formatPercent(item.price24)}}
                 </p>
             </div>
-            <div class="col acc text-gray"
-                 ng-if="!words.length"
-                 style="height: 200px">
-                не найдено
+            <div class="row text-gray m16"
+                 ng-if="words && !words.length">
+                не найдено, но можно <div class="ml4 text-blue ripple" ng-click="openFix()">добавить</div>
             </div>
+            <div class="empty"></div>
         </div>
     </div>
 </div>

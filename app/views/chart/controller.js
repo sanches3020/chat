@@ -53,22 +53,28 @@ function createChart(id) {
     return chart
 }
 
+function seriesOptions() {
+    return {
+        upColor: '#45be88',
+        downColor: '#FF3347',
+        borderUpColor: '#45be88',
+        borderDownColor: '#FF3347',
+        wickUpColor: '#45be88',
+        wickDownColor: '#FF3347'
+    }
+}
 
-app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params) {
+
+app.controller('chart', function ($scope, api, toast, $mdDialog, sheet, params) {
     addFormats($scope, $mdDialog)
+
+    $scope.word = params.word
 
     function init() {
         setTimeout(function () {
             if ($scope.candleSeries == null) {
                 let chart = createChart("chart")
-                $scope.candleSeries = chart.addCandlestickSeries({
-                    upColor: '#45be88',
-                    downColor: '#FF3347',
-                    borderUpColor: '#45be88',
-                    borderDownColor: '#FF3347',
-                    wickUpColor: '#45be88',
-                    wickDownColor: '#FF3347'
-                })
+                $scope.candleSeries = chart.addCandlestickSeries(seriesOptions())
             }
             $scope.setPeriod($scope.period_name)
         }, !window.chartLoaded ? 300 : 0)
@@ -114,12 +120,20 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
     })
 
 
+    api.post("api/event_stats", {key: params.word}).then(function (response) {
+        $scope.stats = [
+            {title: 'Капитализация', value: $scope.formatCount(response.cap)},
+            {title: 'Объём 24ч', value: $scope.formatCount(response.volume)},
+            {title: 'Пользователей', value: $scope.formatCount(response.holders)},
+        ]
+    })
+
     api.post("api/fixes", {word: params.word}).then(function (response) {
         $scope.fixes = response
     })
 
     $scope.buy = function () {
-        $scope.close()
+        sheet('fix', 'views/fix', {})
     }
 
 })

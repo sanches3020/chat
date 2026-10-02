@@ -19,6 +19,7 @@ app.service('toast', function ($mdToast) {
         showMessage(message, 'red-toast')
     }
 })
+
 app.service('api', function ($http, $q, toast) {
 
     function prepareUrl(url) {
@@ -101,6 +102,42 @@ app.service('api', function ($http, $q, toast) {
 
 })
 
+
+app.factory('loader', function (api) {
+    return function (scope) {
+        var wrap = function (promise) {
+            scope.in_progress = true
+            return promise.finally(function () {
+                scope.in_progress = false
+            })
+        }
+
+        return {
+            get: function () {
+                return wrap(api.get.apply(api, arguments))
+            },
+            post: function () {
+                return wrap(api.post.apply(api, arguments))
+            },
+            postSilent: function () {
+                return wrap(api.postSilent.apply(api, arguments))
+            },
+            update: function () {
+                return wrap(api.post.apply(api, arguments).then(function (response) {
+                    api.success()
+                    return response
+                }))
+            },
+            all: function () {
+                return wrap(api.all.apply(api, arguments))
+            },
+            upload: function () {
+                return wrap(api.upload.apply(api, arguments))
+            },
+        }
+    }
+})
+
 app.factory('dialog', function ($mdDialog) {
     return function (controller, template, params, event) {
 
@@ -110,6 +147,7 @@ app.factory('dialog', function ($mdDialog) {
             targetEvent: event || null,
             focusOnOpen: false,
             clickOutsideToClose: true,
+            fullscreen: true,
             multiple: true,
             locals: {
                 params: params || {}
@@ -119,13 +157,98 @@ app.factory('dialog', function ($mdDialog) {
 })
 
 app.factory('sheet', function ($mdBottomSheet) {
-    return function (controller, template) {
+    return function (controller, template, params, event) {
         return $mdBottomSheet.show({
             templateUrl: template + "/index.html",
-            escapeToClose: false,
-            clickOutsideToClose: false,
-            controller: controller
+            escapeToClose: true,
+            clickOutsideToClose: true,
+            targetEvent: event || null,
+            controller: controller,
+            locals: {
+                params: params || {}
+            }
         })
+    }
+})
+
+app.service('clipboard', function ($q) {
+
+    function readTelegram() {
+        var deferred = $q.defer()
+        var resolved = false
+
+        try {
+            if (!window.Telegram || !Telegram.WebApp || !Telegram.WebApp.readTextFromClipboard)
+                return $q.reject('clipboard is not supported')
+
+            Telegram.WebApp.readTextFromClipboard(function (text) {
+                resolved = true
+                deferred.resolve(typeof text === 'string' ? text : '')
+            })
+        } catch (e) {
+            return $q.reject(e)
+        }
+
+        setTimeout(function () {
+            if (!resolved) deferred.reject('clipboard timeout')
+        }, 1500)
+
+        return deferred.promise
+    }
+
+    function writeLegacy(text) {
+        var area = document.createElement('textarea')
+        area.value = text
+        area.setAttribute('readonly', '')
+        area.style.position = 'fixed'
+        area.style.top = '-1000px'
+        area.style.opacity = '0'
+        document.body.appendChild(area)
+        area.select()
+        area.setSelectionRange(0, text.length)
+
+        var copied = false
+        try {
+            copied = document.execCommand('copy')
+        } catch (e) {
+            copied = false
+        }
+
+        document.body.removeChild(area)
+        return copied
+    }
+
+    this.read = function () {
+        if (navigator.clipboard && navigator.clipboard.readText) {
+            var deferred = $q.defer()
+            navigator.clipboard.readText().then(function (text) {
+                deferred.resolve(text)
+            }, function () {
+                readTelegram().then(function (text) {
+                    deferred.resolve(text)
+                }, function (error) {
+                    deferred.reject(error)
+                })
+            })
+            return deferred.promise
+        }
+        return readTelegram()
+    }
+
+    this.write = function (text) {
+        text = text == null ? '' : String(text)
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            var deferred = $q.defer()
+            navigator.clipboard.writeText(text).then(function () {
+                deferred.resolve(true)
+            }, function () {
+                deferred.resolve(writeLegacy(text))
+            })
+            return deferred.promise
+        }
+
+        return $q.when(writeLegacy(text))
     }
 })
 

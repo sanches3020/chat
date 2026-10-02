@@ -1,29 +1,43 @@
-app.controller('main', function ($scope, api, dialog, toast, $state) {
-
+app.controller('main', function ($scope, api, dialog, toast, $state, $transitions) {
     addFormats($scope)
 
-    localStorage.setItem('user_id', 123)
 
-    api.post('api/user').then(function (result) {
-        $scope.user = result
+    api.post("api/event_accumulate", {key: "app_start"})
+
+
+    api.post('api/profile').then(function (result) {
+        $scope.user = result.user
     })
 
+    Telegram.WebApp.expand()
+    Telegram.WebApp.setHeaderColor("#0f1620")
+    localStorage.setItem('user_id', Telegram.WebApp.initDataUnsafe.user?.id || 123)
+
     $scope.menu = {
-        dialogs: "Диалоги",
-        market: "Маркет",
-        profile: "Баланс",
+        dialogs: "Чаты",
+        market: "Тренды",
+        profile: "Лайки",
     }
 
-    $scope.menu_selected = 'dialogs'
+    $scope.menu_selected
 
     $scope.openPage = function (page) {
         $state.go(page)
-        $scope.menu_selected = page
     }
 
+    function updateIndicator(key) {
+        var element = document.querySelector('[data-key="' + key + '"]');
+        if (element) {
+            var container = element.parentElement;
+            container.style.setProperty('--indicator-width', element.offsetWidth + 'px');
+            container.style.setProperty('--indicator-left', element.offsetLeft + 'px');
+        }
+    }
 
-
-
+    $transitions.onSuccess({}, function(transition) {
+        $scope.menu_selected = transition.to().name
+        updateIndicator($scope.menu_selected)
+    })
 
 
 

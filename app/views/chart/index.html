@@ -1,36 +1,58 @@
 <div class="dialog col">
-    <div class="row asc mb16">
-        <div class="flex bold text2">График</div>
+    <div class="row asc p16">
+        <div class="text2">{{word}}</div>
+        <div>{{stats.price24}}</div>
+        <div class="flex"></div>
         <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
     </div>
     <div class="flex col scroll">
-        <img class="refresh-icon img-gray" src="icon/close.svg">
-        <div ng-if="showNoData"
-             class="row acc"
-             style="width: 100%; min-height: 270px; max-height: 270px;">
-            No data
-        </div>
-        <div id="chart"
-             style="width: 100%; min-height: 270px; max-height: 270px;"
-             ng-if="!showNoData">
-        </div>
-        <div class="row acc pv8">
-            <div class="row ph16 pv8 mh16"
-                 ng-repeat="period in periods"
-                 ng-class="{'back-gray rd': period == period_name}"
-                 ng-click="setPeriod(period)">
-                <p class="text4">{{period_names[period]}}</p>
+        <div class="flex col block">
+            <img class="refresh-icon img-gray" src="icon/reload.svg">
+            <div ng-if="showNoData"
+                 class="row acc"
+                 style="width: 100%; min-height: 270px; max-height: 270px;">
+                Нет данных
             </div>
-        </div>
-        <div class="row p16 asc ripple gap8 r8 anim"
-             ng-repeat="item in fixes"
-             ng-style="{'animation-delay': ($index * 0.02 + 0.2) + 's'}">
-            <p class="flex">{{item.word}}</p>
-            <p>=></p>
-            <p class="flex row aee">{{item.fix}}</p>
+            <div id="chart"
+                 style="width: 100%; min-height: 270px; max-height: 270px;"
+                 ng-if="!showNoData">
+            </div>
+            <div class="row acc pv8">
+                <div class="row ph16 pv8 mh16"
+                     ng-repeat="period in periods"
+                     ng-class="{'back-gray rd': period == period_name}"
+                     ng-click="setPeriod(period)">
+                    <p class="text4">{{period_names[period]}}</p>
+                </div>
+            </div>
+            <div class="col m16 back-gray100 r16 anim d03 p16 gap16">
+                <div class="row asc">
+                    <div class="flex text4 text-gray">Капитализация</div>
+                    <div class="text4 bold">{{stats.cap}}</div>
+                </div>
+                <div class="row asc">
+                    <div class="flex text4 text-gray">Пользователи</div>
+                    <div class="text4 bold">{{stats.holders}}</div>
+                </div>
+            </div>
+
+            <div class="row asc ph16 pb8">
+                <div class="flex text3 bold">История</div>
+                <div class="text5 text-gray">Замена</div>
+            </div>
+            <div class="row p16 asc ripple gap8 r8 anim"
+                 ng-repeat="item in fixes"
+                 ng-style="{'animation-delay': ($index * 0.02 + 0.2) + 's'}">
+                <p class="flex">{{item.word}}</p>
+                <p>=></p>
+                <p class="flex row aee">{{item.fix}}</p>
+            </div>
+            <div class="empty"></div>
         </div>
     </div>
-    <button ng-click="buy()">
-        Купить
-    </button>
+    <div class="row p16">
+        <button class="flex" ng-click="buy()">
+            Купить
+        </button>
+    </div>
 </div>

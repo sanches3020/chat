@@ -1,0 +1,18 @@
+<md-bottom-sheet>
+    <div class="col gap16">
+        <div class="row asc text2">
+            <div class="flex row">Ваш ID</div>
+            <img class="img-white img32 rd ripple" ng-click="close()" src="icon/close.svg">
+        </div>
+
+        <div class="row text5 text-gray">
+            <span>передайте его отправителю</span>
+        </div>
+
+        <input ng-model="user_id">
+
+        <button ng-click="copy()">
+            Копировать
+        </button>
+    </div>
+</md-bottom-sheet>

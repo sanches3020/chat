@@ -1,0 +1,25 @@
+<md-bottom-sheet>
+    <div class="col gap16 pb32 pt16">
+        <div class="row asc text2">
+            <div class="flex row">Пригласить</div>
+            <img class="img-white img32 rd ripple" ng-click="close()" src="icon/close.svg">
+        </div>
+
+        <div class="row text5 text-gray">
+            <span>ссылка для приглашения в «{{dialog_title}}»</span>
+        </div>
+
+        <div class="row relative">
+            <input class="flex"
+                   ng-model="link"
+                   readonly>
+            <div class="absolute right p8 mr8 r16 ripple" ng-click="copy()">
+                <img class="img-white img24" src="icon/copy.svg">
+            </div>
+        </div>
+
+        <button ng-click="share()">
+            Отправить
+        </button>
+    </div>
+</md-bottom-sheet>
