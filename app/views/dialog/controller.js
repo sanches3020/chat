@@ -33,7 +33,6 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
     }
 
     $scope.send = function () {
-        if (!$scope.message_text) return
         api.post('api/send', {
             dialog_id: params.dialog_id,
             message_text: $scope.message_text,

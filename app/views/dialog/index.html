@@ -49,8 +49,9 @@
                   rows="1"
                   placeholder="Сообщение"
                   ng-model="message_text"
-                  autocomplete="off"></textarea>
-        <button type="submit" class="r100 p8">
+                  autocomplete="off"
+                  required></textarea>
+        <button type="submit" class="r100 p8" ng-disabled="!message_text">
             <img class="img-white img24" src="/icon/send.svg">
         </button>
     </form>

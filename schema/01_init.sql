@@ -46,7 +46,8 @@ CREATE TABLE `candles` (
 
 CREATE TABLE `dialogs` (
                            `dialog_id` int(11) NOT NULL,
-                           `dialog_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+                           `dialog_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                           `dialog_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
