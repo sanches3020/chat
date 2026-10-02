@@ -9,6 +9,10 @@ app.controller('profile', function ($scope, api, dialog, sheet) {
         sheet('send', 'views/send', {}, event).then($scope.reload)
     }
 
+    $scope.addFunds = function (event) {
+        sheet('receive', 'views/receive', {}, event).then($scope.reload)
+    }
+
     $scope.openEdit = function (item, event) {
         localStorage.clear()
     }

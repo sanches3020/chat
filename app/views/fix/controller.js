@@ -1,6 +1,10 @@
-app.controller('fix', function ($scope, api, toast, $mdDialog) {
+app.controller('fix', function ($scope, api, toast, $mdBottomSheet) {
 
-    addFormats($scope, $mdDialog)
+    addFormats($scope)
+
+    $scope.close = function () {
+        $mdBottomSheet.hide()
+    }
 
     $scope.price = 50
     $scope.loading = false
@@ -16,7 +20,7 @@ app.controller('fix', function ($scope, api, toast, $mdDialog) {
             word: $scope.word.trim(),
             fix: $scope.fix.trim(),
         }).then(function () {
-            $mdDialog.hide()
+            $mdBottomSheet.hide()
         }).finally(function () {
             $scope.loading = false
         })
