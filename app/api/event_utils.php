@@ -40,6 +40,14 @@ function chartValue($key, $period = "D") {
     return 0;
 }
 
+function balanceKey($user_id) {
+    return "balance_" . $user_id;
+}
+
+function trackBalance($user_id, $balance) {
+    track(balanceKey($user_id), $balance);
+}
+
 function trackAccumulate($key, $value = 1){
     track($key, chartValue($key) + $value);
 }
