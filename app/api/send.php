@@ -26,11 +26,14 @@ foreach ($words as $word) {
     }
 }
 
+$user = row("users", ["user_id" => $user_id]);
+$new_balance = $user["user_balance"] + $message_likes;
+
 if ($message_likes > 0) {
-    $user = row("users", ["user_id" => $user_id]);
     update("users", [
-        "user_balance" => $user["user_balance"] + $message_likes,
+        "user_balance" => $new_balance,
     ], ["user_id" => $user_id]);
+    trackBalance($user_id, $new_balance);
 }
 
 $message_id = insert("messages", [
@@ -40,5 +43,7 @@ $message_id = insert("messages", [
     "message_result" => $message_result,
     "message_likes" => $message_likes,
 ]);
+
+query("update dialogs set dialog_timestamp = now() where dialog_id = " . (int)$dialog_id);
 
 success();
