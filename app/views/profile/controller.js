@@ -38,13 +38,6 @@ app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard
         })
     }
 
-    $scope.randomName = function () {
-        api.post('api/user_update', {}).then(function (user) {
-            $scope.user = user
-            toast.success('Имя обновлено')
-        })
-    }
-
     function balanceKey() {
         let user_id = $scope.user ? $scope.user.user_id : localStorage.getItem('user_id')
         return 'balance_' + user_id
