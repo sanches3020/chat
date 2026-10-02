@@ -1,12 +1,47 @@
 <div class="flex col">
-    <div class="row asc m16 text4">
-        <img class="img-white img32 ripple"
-             src="icon/edit.svg"
-             ng-click="openEdit()">
-        <div class="flex row acc" ng-click="addFunds()">@user{{user.user_id}}</div>
-        <img class="img-red img32 rd ripple"
-             ui-sref="profile"
-             src="icon/like.svg">
+    <div class="row asc m16 text4 gap8">
+        <div class="profile-head-side col acc p8" ng-click="openEdit($event)" title="Изменить имя">
+            <img class="img-gray img24 ripple" src="icon/edit.svg">
+        </div>
+
+        <div class="flex col acc text-crop" ng-click="addFunds($event)" title="Пополнить">
+            <div class="bold text-crop profile-name">{{user.user_name}}</div>
+            <div class="text5 text-gray nowrap">@user{{user.user_id}}</div>
+        </div>
+
+        <md-menu md-position-mode="target-right bottom" class="profile-head-side">
+            <img class="img-white img24 ripple"
+                 src="icon/settings.svg"
+                 aria-label="Настройки"
+                 ng-click="$mdMenu.open($event)">
+            <md-menu-content width="4" class="profile-menu">
+                <md-menu-item>
+                    <md-button ng-click="openSupport($event)">
+                        <img class="img-white img18" src="icon/support.svg">
+                        <span>Связаться с поддержкой</span>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="copyId()">
+                        <img class="img-white img18" src="icon/copy.svg">
+                        <span>Скопировать ID</span>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="randomName()">
+                        <img class="img-white img18" src="icon/user-circle.svg">
+                        <span>Случайное имя</span>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item class="menu-static">
+                    <div class="row asc gap8">
+                        <span class="flex">Версия</span>
+                        <span class="text-gray">{{version}}</span>
+                    </div>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
     </div>
 
     <div class="flex col scroll">
@@ -24,9 +59,9 @@
                         <img class="img-white img24" src="icon/qr.svg">
                         <span class="text5">Получить</span>
                     </button>
-                    <button class="col acc p8 r16 back-gray100" ng-click="swap()">
-                        <img class="img-white img24" src="icon/market.svg">
-                        <span class="text5">Обменять</span>
+                    <button class="col acc p8 r16 back-gray100" ng-click="openBalance($event)">
+                        <img class="img-white img24" src="icon/chart.svg">
+                        <span class="text5">График</span>
                     </button>
                     <button class="col acc p8 r16 back-gray100" ng-click="send()">
                         <img class="img-white img24" src="icon/send.svg">
