@@ -1,21 +1,27 @@
-<div class="dialog col">
-    <div class="row asc mb16">
-        <div class="flex bold text2">Приглашение</div>
-        <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
-    </div>
-    <div class="flex"></div>
-    <div class="col gap16">
+<md-bottom-sheet>
+    <form class="col gap16" ng-submit="invite()">
+        <div class="row asc text2">
+            <div class="flex row">Новый диалог</div>
+            <img class="img-white img32 rd ripple" ng-click="close()" src="icon/close.svg">
+        </div>
+
+        <div class="row text5 text-gray">
+            <span>придумайте название комнаты</span>
+        </div>
+
         <div class="row relative">
-            <input class="flex ph16 pv8"
+            <input class="flex"
                    ng-model="dialog_title"
-                   type="text"
-                   placeholder="Название комнаты">
+                   placeholder="Название комнаты"
+                   required>
             <div class="absolute right p8 mr8 r16 ripple" ng-click="reload()">
                 <img class="img-white img24" src="icon/reload.svg">
             </div>
         </div>
-        <button ng-click="invite()">
-            Поделиться
+
+        <button type="submit"
+                ng-disabled="in_progress">
+            Создать
         </button>
-    </div>
-</div>
+    </form>
+</md-bottom-sheet>

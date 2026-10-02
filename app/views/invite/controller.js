@@ -1,5 +1,10 @@
-app.controller('invite', function ($scope, api, toast, $mdDialog, dialog) {
-    addFormats($scope, $mdDialog)
+app.controller('invite', function ($scope, api, loader, toast, $mdBottomSheet) {
+    addFormats($scope)
+    let load = loader($scope)
+
+    $scope.close = function () {
+        $mdBottomSheet.hide()
+    }
 
     $scope.reload = function () {
         api.post('api/dialog_title').then(function (result) {
@@ -10,10 +15,11 @@ app.controller('invite', function ($scope, api, toast, $mdDialog, dialog) {
     $scope.reload()
 
     $scope.invite = function () {
-        api.post('api/dialog_insert', {
+        load.post('api/dialog_insert', {
             dialog_title: $scope.dialog_title
         }).then(function (result) {
-           $scope.success()
+            toast.success('Диалог создан')
+            $scope.close(result.dialog_id)
         })
     }
 })
