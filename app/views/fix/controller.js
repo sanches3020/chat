@@ -1,23 +1,15 @@
-app.controller('fix', function ($scope, api, toast, $mdBottomSheet) {
+app.controller('fix', function ($scope, api, loader, toast, $mdBottomSheet) {
     addFormats($scope)
-
+    let load = loader($scope)
 
     $scope.close = function () {
         $mdBottomSheet.hide()
     }
 
-    $scope.price = 50
-    $scope.loading = false
-
     $scope.replace = function () {
-        api.post('api/word_update', {
-            word: $scope.word.trim(),
-            fix: $scope.fix.trim(),
-        }).then(function () {
-            $mdBottomSheet.hide()
-        }).finally(function () {
-            $scope.loading = false
-        })
+        load.post('api/word_update', {
+            word: $scope.word,
+            fix: $scope.fix,
+        }).then($scope.close)
     }
-
 })
