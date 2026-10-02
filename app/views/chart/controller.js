@@ -68,6 +68,8 @@ function seriesOptions() {
 app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params) {
     addFormats($scope, $mdDialog)
 
+    $scope.word = params.word
+
     function init() {
         setTimeout(function () {
             if ($scope.candleSeries == null) {
@@ -117,6 +119,14 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, dialog, params)
         clearInterval(interval)
     })
 
+
+    api.post("api/event_stats", {key: params.word}).then(function (response) {
+        $scope.stats = [
+            {title: 'Капитализация', value: $scope.formatCount(response.cap)},
+            {title: 'Объём 24ч', value: $scope.formatCount(response.volume)},
+            {title: 'Пользователей', value: $scope.formatCount(response.holders)},
+        ]
+    })
 
     api.post("api/fixes", {word: params.word}).then(function (response) {
         $scope.fixes = response

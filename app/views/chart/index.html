@@ -1,6 +1,8 @@
 <div class="dialog col">
     <div class="row asc p16">
-        <div class="flex bold text2">График</div>
+        <div class="text2">{{word}}</div>
+        <div>{{stats.price24}}</div>
+        <div class="flex"></div>
         <img class="img-white img30 ripple r16 ripple" src="icon/close.svg" ng-click="close()">
     </div>
     <div class="flex col scroll">
@@ -22,6 +24,21 @@
                      ng-click="setPeriod(period)">
                     <p class="text4">{{period_names[period]}}</p>
                 </div>
+            </div>
+            <div class="col m16 back-gray100 r16 anim d03 p16 gap16">
+                <div class="row asc">
+                    <div class="flex text4 text-gray">Капитализация</div>
+                    <div class="text4 bold">{{stats.cap}}</div>
+                </div>
+                <div class="row asc">
+                    <div class="flex text4 text-gray">Пользователи</div>
+                    <div class="text4 bold">{{stats.holders}}</div>
+                </div>
+            </div>
+
+            <div class="row asc ph16 pb8">
+                <div class="flex text3 bold">История</div>
+                <div class="text5 text-gray">Замена</div>
             </div>
             <div class="row p16 asc ripple gap8 r8 anim"
                  ng-repeat="item in fixes"
