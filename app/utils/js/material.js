@@ -157,12 +157,16 @@ app.factory('dialog', function ($mdDialog) {
 })
 
 app.factory('sheet', function ($mdBottomSheet) {
-    return function (controller, template) {
+    return function (controller, template, params, event) {
         return $mdBottomSheet.show({
             templateUrl: template + "/index.html",
             escapeToClose: true,
             clickOutsideToClose: true,
-            controller: controller
+            targetEvent: event || null,
+            controller: controller,
+            locals: {
+                params: params || {}
+            }
         })
     }
 })

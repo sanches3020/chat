@@ -16,7 +16,7 @@
                  ng-repeat="item in dialogs track by item.dialog_id"
                  ng-click="openDialog(item.dialog_id, $event)"
                  ng-style="{'animation-delay': ($index * 0.02) + 's'}">
-                <div class="r100"
+                <div class="r100 avatar"
                      ng-style="{'background-color': stringToColor(item.dialog_title)}">
                     <img class="img-white img32 m8" src="icon/avatar.svg">
                 </div>

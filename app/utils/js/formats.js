@@ -200,13 +200,7 @@ function addFormats($scope, $mdDialog) {
         for (let i = 0; i < str.length; i++) {
             hash = str.charCodeAt(i) + ((hash << 5) - hash);
         }
-        let r = (hash & 0xFF0000) >> 16;
-        let g = (hash & 0x00FF00) >> 8;
-        let b = hash & 0x0000FF;
-        r = Math.abs(r % 256);
-        g = Math.abs(g % 256);
-        b = Math.abs(b % 256);
-        return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+        return `hsl(${Math.abs(hash % 360)}, 65%, 50%)`;
     }
 
     if ($mdDialog) {
