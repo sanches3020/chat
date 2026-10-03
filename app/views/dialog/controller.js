@@ -1,4 +1,4 @@
-app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet, params) {
+app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet, params, $interval) {
 
     addFormats($scope, $mdDialog)
 
@@ -24,6 +24,11 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
         })
     }
     $scope.reload()
+
+    let interval = $interval($scope.reload, 1000)
+    $scope.$on('$destroy', function () {
+        $interval.cancel(interval)
+    })
 
     $scope.invite = function (event) {
         sheet('share', 'views/share', {
