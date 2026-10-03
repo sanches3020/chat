@@ -1,3 +1,5 @@
+SET NAMES 'utf8' COLLATE 'utf8_bin';
+
 INSERT INTO sentences (sentence, sentence_style) VALUES ('Чё, проснулся, убогий', 'greeting');
 INSERT INTO sentences (sentence, sentence_style) VALUES ('С днём рождения, лошара', 'congratulation');
 INSERT INTO sentences (sentence, sentence_style) VALUES ('Заткнись, позор семьи', 'insult');

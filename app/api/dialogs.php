@@ -10,6 +10,9 @@ $response = [];
 foreach ($subs as $sub)
     $response[] = row("dialogs", ["dialog_id" => $sub]);
 
+usort($response, function($a, $b) {
+    return strtotime($b['dialog_timestamp']) <=> strtotime($a['dialog_timestamp']);
+});
 
 if (sizeof($subs) == 0)
     $subs[] = 0;

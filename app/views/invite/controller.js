@@ -2,8 +2,8 @@ app.controller('invite', function ($scope, api, loader, toast, $mdBottomSheet) {
     addFormats($scope)
     let load = loader($scope)
 
-    $scope.close = function () {
-        $mdBottomSheet.hide()
+    $scope.close = function (dialog_id) {
+        $mdBottomSheet.hide(dialog_id)
     }
 
     $scope.reload = function () {

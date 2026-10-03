@@ -2,9 +2,7 @@ app.controller('dialogs', function ($scope, $state, api, dialog, sheet, $interva
     addFormats($scope)
 
     $scope.openDialog = function (dialog_id, event) {
-        dialog('dialog', 'views/dialog', {
-            dialog_id: dialog_id
-        }, event)
+        dialog('dialog', 'views/dialog', {dialog_id: dialog_id}, event)
     }
 
     $scope.reload = function () {
@@ -25,5 +23,9 @@ app.controller('dialogs', function ($scope, $state, api, dialog, sheet, $interva
 
     $scope.openInvite = function (event) {
         sheet('invite', 'views/invite', {}, event).then($scope.reload)
+    }
+
+    $scope.openSupport = function (event) {
+        dialog('dialog', 'views/dialog', {dialog_id: 1}, event)
     }
 })

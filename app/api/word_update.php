@@ -4,7 +4,6 @@ require_once __DIR__ . '/event_utils.php';
 
 $word = get_string_required("word");
 $fix = get_string_required("fix");
-$word_type = get_string_required("word_type");
 $user_id = get_long_required("token");
 
 $user = row("users", ["user_id" => $user_id]);
@@ -19,7 +18,6 @@ insertOrUpdate("words", "word", $word, [
     "user_id" => $user_id,
     "word" => $word,
     "fix" => $fix,
-    "word_type" => $word_type,
 ]);
 
 insert("fixes", [
