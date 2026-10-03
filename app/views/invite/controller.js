@@ -7,7 +7,7 @@ app.controller('invite', function ($scope, api, loader, toast, $mdBottomSheet) {
     }
 
     $scope.reload = function () {
-        api.post('api/dialog_title').then(function (result) {
+        api.postSilent('api/dialog_title').then(function (result) {
             $scope.dialog_title = result.dialog_title
         })
     }

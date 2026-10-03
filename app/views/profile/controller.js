@@ -44,7 +44,7 @@ app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard
     }
 
     $scope.reload = function () {
-        api.post('api/profile').then(function (result) {
+        api.postSilent('api/profile').then(function (result) {
             $scope.user = result.user
             $scope.stats = result.stats
         })

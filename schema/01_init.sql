@@ -51,7 +51,7 @@ CREATE TABLE `dialogs` (
                            `dialog_style` varchar(64) NOT NULL,
                            `dialog_rate` int(11) NOT NULL DEFAULT '0',
                            `dialog_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,7 @@ CREATE TABLE `fixes` (
                          `fix` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                          `fix_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -81,7 +81,7 @@ CREATE TABLE `messages` (
                             `sentence_id` int(11) DEFAULT NULL,
                             `message_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                             `message_likes` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE `sentences` (
                              `sentence_id` int(11) NOT NULL,
                              `sentence` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                              `sentence_style` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE `stats` (
 CREATE TABLE `subs` (
                         `user_id` int(11) NOT NULL,
                         `dialog_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,7 @@ CREATE TABLE `users` (
                          `user_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                          `user_image` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                          `user_balance` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -144,7 +144,7 @@ CREATE TABLE `words` (
                          `user_id` int(11) NOT NULL,
                          `word_rate` float NOT NULL DEFAULT '0',
                          `word_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Индексы сохранённых таблиц

@@ -8,7 +8,7 @@ app.controller('dialogs', function ($scope, $state, api, dialog, sheet, $interva
     }
 
     $scope.reload = function () {
-        api.post('api/dialogs').then(function (result) {
+        api.postSilent('api/dialogs').then(function (result) {
             $scope.dialogs = result
         })
     }

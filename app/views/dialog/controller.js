@@ -16,7 +16,7 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
     }
 
     $scope.reload = function () {
-        api.post('api/dialog', {
+        api.postSilent('api/dialog', {
             dialog_id: params.dialog_id
         }).then(function (result) {
             $scope.dialog = result.dialog
