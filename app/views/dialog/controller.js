@@ -4,6 +4,12 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
 
     $scope.user_id = localStorage.getItem('user_id')
 
+    $scope.show = {}
+
+    $scope.markShow = function () {
+        $scope.show
+    }
+
     function markGroups(messages) {
         for (let i = 0; i < (messages || []).length; i++) {
             let prev = messages[i - 1]
