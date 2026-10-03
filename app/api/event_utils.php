@@ -51,7 +51,7 @@ function balanceKey($user_id)
 
 function trackBalance($user_id, $balance)
 {
-    track(balanceKey($user_id), $balance);
+    trackAccumulate(balanceKey($user_id), $balance);
 }
 
 function trackAccumulate($key, $value = 1)

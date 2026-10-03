@@ -3,17 +3,20 @@ require_once __DIR__ . '/auth.php';
 
 $user_id = get_long_required("token");
 
-$response = selectSql(
-    "select d.*, m.user_id, m.message_id, m.message_text, m.message_result, m.message_timestamp, m.message_likes" .
-    " from subs s" .
-    " join dialogs d on d.dialog_id = s.dialog_id" .
-    " left join messages m on m.message_id = (" .
-    "     select m2.message_id from messages m2" .
-    "     where m2.dialog_id = d.dialog_id" .
-    "     order by m2.message_timestamp desc, m2.message_id desc limit 1" .
-    " )" .
-    " where s.user_id = " . (int)$user_id .
-    " order by d.dialog_timestamp desc, d.dialog_id desc"
-);
+$subs = selectList("subs", "dialog_id", ["user_id" => $user_id]);
+
+$response = [];
+
+foreach ($subs as $sub)
+    $response[] = row("dialogs", ["dialog_id" => $sub]);
+
+
+if (sizeof($subs) == 0)
+    $subs[] = 0;
+
+$top = selectListSql("select dialog_id from dialogs where dialog_id not in (" . implode(",", $subs) . ") order by dialog_rate desc limit 10");
+
+foreach ($top as $top_id)
+    $response[] = row("dialogs", ["dialog_id" => $top_id]);
 
 success($response);

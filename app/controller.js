@@ -11,7 +11,7 @@ app.controller('main', function ($scope, api, dialog, toast, $state, $transition
 
     Telegram.WebApp.expand()
     Telegram.WebApp.setHeaderColor("#0f1620")
-    localStorage.setItem('user_id', Telegram.WebApp.initDataUnsafe.user?.id || 123)
+    localStorage.setItem('user_id', Telegram.WebApp.initDataUnsafe.user?.id || 321)
 
     $scope.menu = {
         dialogs: "Чаты",

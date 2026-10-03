@@ -13,7 +13,7 @@ $user = row("users", ["user_id" => $user_id]);
     error("Недостаточно баланса");*/
 
 update("users", ["user_balance" => $user["user_balance"] - 50], ["user_id" => $user_id]);
-trackBalance($user_id, $user["user_balance"] - 50);
+trackBalance($user_id, - 50);
 
 insertOrUpdate("words", "word", $word, [
     "user_id" => $user_id,
