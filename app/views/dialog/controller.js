@@ -44,7 +44,7 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
 
     $scope.setRandom = function () {
         api.post('api/sentence_random', {
-            sentence_style: $scope.sentence_style,
+            sentence_style: $scope.dialog.dialog_style,
         }).then($scope.selectSentence)
     }
 

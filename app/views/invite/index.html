@@ -5,17 +5,29 @@
             <img class="img-white img32 rd ripple" ng-click="close()" src="icon/close.svg">
         </div>
 
-        <div class="row text5 text-gray">
-            <span>придумайте название комнаты</span>
+        <div class="col gap4 relative">
+            <div class="row text5 text-gray">Название комнаты</div>
+            <div class="col gap4 relative">
+                <input class="flex"
+                       ng-model="dialog_title"
+                       placeholder="Название комнаты"
+                       required>
+                <div class="absolute right p8 mr8 r16 ripple" ng-click="reload()">
+                    <img class="img-white img24" src="icon/reload.svg">
+                </div>
+            </div>
         </div>
 
-        <div class="row relative">
-            <input class="flex"
-                   ng-model="dialog_title"
-                   placeholder="Название комнаты"
-                   required>
-            <div class="absolute right p8 mr8 r16 ripple" ng-click="reload()">
-                <img class="img-white img24" src="icon/reload.svg">
+        <div class="col gap4 relative">
+            <div class="row text5 text-gray">Стиль диалога</div>
+            <div class="col gap4 relative">
+                <input class="flex"
+                       ng-model="dialog_style"
+                       placeholder="Стиль диалога"
+                       required>
+                <div class="absolute right p8 mr8 r16 ripple" ng-click="randomStyle()">
+                    <img class="img-white img24" src="icon/reload.svg">
+                </div>
             </div>
         </div>
 

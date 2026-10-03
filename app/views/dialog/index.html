@@ -33,7 +33,7 @@
                          ng-style="{'color': stringToColor(item.user_name)}">{{item.user_name}}</div>
                     <div class="msg-bubble relative r16 back-gray200 pv8 ph16"
                          ng-class="[(item.grouped ? 'grouped' : ''), (item.user_id == user_id ? 'mine' : 'theirs')]">
-                        <div class="text4 nowrap-disabled">{{item.message_text}}<span
+                        <div class="text4 nowrap-disabled">{{item.message_result}}<span
                             class="msg-time">{{formatTime(item.message_timestamp)}}</span></div>
                         <span class="msg-likes like-count" ng-if="item.message_likes > 0">
                             <img class="img-red img14" src="icon/like.svg">{{item.message_likes}}

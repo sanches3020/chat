@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Окт 03 2026 г., 09:58
+-- Время создания: Окт 03 2026 г., 10:36
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -48,6 +48,7 @@ CREATE TABLE `dialogs` (
                            `user_id` int(11) NOT NULL,
                            `dialog_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                            `dialog_message` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+                           `dialog_style` varchar(64) NOT NULL,
                            `dialog_rate` int(11) NOT NULL DEFAULT '0',
                            `dialog_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
