@@ -1,4 +1,4 @@
-app.controller('dialogs', function ($scope, $state, api, dialog, sheet) {
+app.controller('dialogs', function ($scope, $state, api, dialog, sheet, $interval) {
     addFormats($scope)
 
     $scope.openDialog = function (dialog_id, event) {
@@ -10,13 +10,18 @@ app.controller('dialogs', function ($scope, $state, api, dialog, sheet) {
     $scope.reload = function () {
         api.post('api/dialogs').then(function (result) {
             $scope.dialogs = result
-            /*dialog('chart', 'dialogs/chart', {
-
-            })*/
         })
     }
+    /*setTimeout(function () {
+        $scope.openDialog($scope.dialogs[0].dialog_id)
+    }, 500)*/
 
     $scope.reload()
+
+    let interval = $interval($scope.reload, 1000)
+    $scope.$on('$destroy', function () {
+        $interval.cancel(interval)
+    })
 
     $scope.openInvite = function (event) {
         sheet('invite', 'views/invite', {}, event).then($scope.reload)

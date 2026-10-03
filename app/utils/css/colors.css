@@ -239,6 +239,10 @@
     color: var(--gray400);
 }
 
+.text-gray300 {
+    color: var(--gray300);
+}
+
 .text-green {
     color: var(--green);
 }

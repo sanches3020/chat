@@ -4,7 +4,7 @@ require_once __DIR__ . '/event_utils.php';
 
 $word = get_string_required("word");
 $fix = get_string_required("fix");
-$type = get_string_required("type");
+$word_type = get_string_required("word_type");
 $user_id = get_long_required("token");
 
 $user = row("users", ["user_id" => $user_id]);
@@ -17,9 +17,9 @@ trackBalance($user_id, - 50);
 
 insertOrUpdate("words", "word", $word, [
     "user_id" => $user_id,
-    "type" => $type,
     "word" => $word,
     "fix" => $fix,
+    "word_type" => $word_type,
 ]);
 
 insert("fixes", [

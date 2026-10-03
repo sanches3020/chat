@@ -1,4 +1,4 @@
-app.controller('market', function ($scope, api, toast, dialog, sheet) {
+app.controller('market', function ($scope, api, toast, dialog, sheet, $interval) {
 
     addFormats($scope)
 
@@ -17,8 +17,24 @@ app.controller('market', function ($scope, api, toast, dialog, sheet) {
             $scope.words = response
             //$scope.openChart($scope.words[0])
         })
+        api.post("api/words_stats", {
+            search_text: $scope.search_text,
+        }).then(function (response) {
+            $scope.stats = response
+        })
     }
     $scope.reload()
+
+
+    let interval = $interval($scope.reload, 1000)
+    $scope.$on('$destroy', function () {
+        $interval.cancel(interval)
+    })
+
+    $scope.clear = function () {
+        $scope.search_text = ''
+    }
+
 
     /*setTimeout(function () {
         $scope.openChart(response[0])

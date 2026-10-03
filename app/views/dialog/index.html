@@ -22,13 +22,14 @@
              ng-class="item.group_end ? 'mt8' : 'mt4'"
              ng-style="{'animation-delay': ($index * 0.02) + 's'}">
             <div class="row gap8" ng-class="item.user_id == user_id ? 'aec' : 'asc'">
-                <div class="r100" ng-if="item.user_id != user_id && item.group_start"
+                <div class="r100" ng-if="item.user_id != user_id && item.group_end"
                      ng-style="{'background-color': stringToColor(item.user_name)}">
                     <img class="img-white img20 m4" src="icon/avatar.svg">
                 </div>
-                <div class="col gap4 message-body">
+                <div class="img20 m4" ng-if="item.user_id != user_id && !item.group_end"></div>
+                <div class="col gap4 message-body ripple">
                     <div class="text5 text-crop nowrap"
-                         ng-if="item.user_id != user_id && item.group_start"
+                         ng-if="item.user_id != user_id && item.group_end"
                          ng-style="{'color': stringToColor(item.user_name)}">{{item.user_name}}</div>
                     <div class="msg-bubble relative r16 back-gray200 pv8 ph16"
                          ng-class="[(item.grouped ? 'grouped' : ''), (item.user_id == user_id ? 'mine' : 'theirs')]">
@@ -41,10 +42,16 @@
                 </div>
             </div>
         </div>
+        <div class="col acc ph16 mt32 text5"  ng-if="!messages.length">
+            <div class="text-gray">Начните жуткую зарубу первым. Кнопка слева помогает выразить всесь спектр эмоций</div>
+        </div>
     </div>
 
-    <form class="row asc gap8 pv8 ph16 m16 back-gray200 r32"
+    <form class="row asc pv8 ph16 m16 back-gray200 r32"
           ng-submit="send()">
+        <div class="r100 p8" ng-click="setRandom()">
+            <img class="img-white img24" src="/icon/reload.svg">
+        </div>
         <textarea class="flex"
                   rows="1"
                   placeholder="Сообщение"

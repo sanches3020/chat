@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Окт 03 2026 г., 07:56
+-- Время создания: Окт 03 2026 г., 09:58
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -77,8 +77,21 @@ CREATE TABLE `messages` (
                             `user_id` int(11) NOT NULL,
                             `message_text` varchar(1000) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                             `message_result` varchar(1000) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                            `sentence_id` int(11) DEFAULT NULL,
                             `message_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                             `message_likes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `sentences`
+--
+
+CREATE TABLE `sentences` (
+                             `sentence_id` int(11) NOT NULL,
+                             `sentence` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                             `sentence_style` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,8 +139,9 @@ CREATE TABLE `users` (
 CREATE TABLE `words` (
                          `word` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                          `fix` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-                         `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                         `word_type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                          `user_id` int(11) NOT NULL,
+                         `word_rate` float NOT NULL DEFAULT '0',
                          `word_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -148,6 +162,12 @@ ALTER TABLE `messages`
     ADD PRIMARY KEY (`message_id`);
 
 --
+-- Индексы таблицы `sentences`
+--
+ALTER TABLE `sentences`
+    ADD PRIMARY KEY (`sentence_id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -162,6 +182,12 @@ ALTER TABLE `dialogs`
 --
 ALTER TABLE `messages`
     MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `sentences`
+--
+ALTER TABLE `sentences`
+    MODIFY `sentence_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

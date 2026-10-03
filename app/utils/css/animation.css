@@ -51,6 +51,17 @@
     animation: enter-animation 1s ease both;
 }
 
+.ng-leave .anim,
+.ng-leave.anim {
+    animation: none !important;
+    transition: none !important;
+}
+
+.ng-leave {
+    display: none !important;
+}
+
+
 @keyframes height-animation {
     0% {
         opacity: 0;
@@ -83,11 +94,6 @@
 .d2 { animation-delay: 2s }
 .d25 { animation-delay: 2.5s }
 .d3 { animation-delay: 3s }
-
-
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard) {
+app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard, $interval) {
     addFormats($scope)
 
     $scope.version = '1.0.0'
@@ -50,4 +50,9 @@ app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard
         })
     }
     $scope.reload()
+
+    let interval = $interval($scope.reload, 1000)
+    $scope.$on('$destroy', function () {
+        $interval.cancel(interval)
+    })
 })

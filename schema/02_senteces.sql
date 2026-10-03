@@ -1,0 +1,10 @@
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Чё, проснулся, убогий', 'greeting');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('С днём рождения, лошара', 'congratulation');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Заткнись, позор семьи', 'insult');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Ты чё, тупой совсем', 'insult');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('О, клоун припёрся', 'greeting');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Поздравляю, дебил', 'congratulation');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Твоя башка — пустой чан', 'mockery');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Слышь, фраер, свали уже', 'insult');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Живи, чучело, но молча', 'congratulation');
+INSERT INTO sentences (sentence, sentence_style) VALUES ('Ты жалок, братан', 'mockery');

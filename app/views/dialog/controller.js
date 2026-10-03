@@ -1,4 +1,4 @@
-app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet, params) {
+app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet, params, $interval) {
 
     addFormats($scope, $mdDialog)
 
@@ -25,11 +25,27 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
     }
     $scope.reload()
 
+    let interval = $interval($scope.reload, 1000)
+    $scope.$on('$destroy', function () {
+        $interval.cancel(interval)
+    })
+
     $scope.invite = function (event) {
         sheet('share', 'views/share', {
             dialog_id: params.dialog_id,
             dialog_title: $scope.dialog && $scope.dialog.dialog_title
         }, event)
+    }
+
+    $scope.selectSentence = function (sentence) {
+        $scope.message_text = sentence.sentence
+        $scope.sentence_id = sentence.sentence_id
+    }
+
+    $scope.setRandom = function () {
+        api.post('api/sentence_random', {
+            sentence_style: $scope.sentence_style,
+        }).then($scope.selectSentence)
     }
 
     $scope.send = function () {
