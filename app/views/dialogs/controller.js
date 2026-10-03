@@ -12,9 +12,9 @@ app.controller('dialogs', function ($scope, $state, api, dialog, sheet, $interva
             $scope.dialogs = result
         })
     }
-    setTimeout(function () {
+    /*setTimeout(function () {
         $scope.openDialog($scope.dialogs[0].dialog_id)
-    }, 500)
+    }, 500)*/
 
     $scope.reload()
 
