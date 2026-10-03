@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Окт 03 2026 г., 09:44
+-- Время создания: Окт 03 2026 г., 09:58
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -77,6 +77,7 @@ CREATE TABLE `messages` (
                             `user_id` int(11) NOT NULL,
                             `message_text` varchar(1000) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                             `message_result` varchar(1000) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                            `sentence_id` int(11) DEFAULT NULL,
                             `message_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                             `message_likes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
