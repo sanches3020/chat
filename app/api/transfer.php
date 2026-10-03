@@ -23,7 +23,7 @@ if (!$recipient)
 update("users", ["user_balance" => $sender["user_balance"] - $amount], ["user_id" => $user_id]);
 update("users", ["user_balance" => $recipient["user_balance"] + $amount], ["user_id" => $recipient_id]);
 
-trackBalance($user_id, $sender["user_balance"] - $amount);
-trackBalance($recipient_id, $recipient["user_balance"] + $amount);
+trackBalance($user_id, -$amount);
+trackBalance($recipient_id, $amount);
 
 success();

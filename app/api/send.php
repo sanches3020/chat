@@ -26,15 +26,17 @@ foreach ($words as $word) {
     }
 }
 
+$dialog = row("dialogs", ["dialog_id" => $dialog_id]);
+
 $user = row("users", ["user_id" => $user_id]);
-$new_balance = $user["user_balance"] + $message_likes;
 
 if ($message_likes > 0) {
-    update("users", [
-        "user_balance" => $new_balance,
-    ], ["user_id" => $user_id]);
-    trackBalance($user_id, $new_balance);
+    update("users", ["user_balance" => $user["user_balance"] + $message_likes], ["user_id" => $user_id]);
+    update("dialogs", ["dialog_rate" => $dialog["dialog_rate"] + $message_likes], ["dialog_id" => $dialog_id]);
+    trackBalance($user_id, +$message_likes);
 }
+
+update("dialogs", ["dialog_message" => $message_result], ["dialog_id" => $dialog_id]);
 
 $message_id = insert("messages", [
     "user_id" => $user_id,

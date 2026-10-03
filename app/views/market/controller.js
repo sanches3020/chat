@@ -3,15 +3,11 @@ app.controller('market', function ($scope, api, toast, dialog, sheet) {
     addFormats($scope)
 
     $scope.openChart = function (item, event) {
-        dialog('chart', 'views/chart', {
-            word: item.word
-        }, event)
+        dialog('chart', 'views/chart', {word: item.word}, event).then($scope.reload)
     }
 
     $scope.openFix = function () {
-        sheet('fix', 'views/fix', {
-            word: $scope.search_text
-        })
+        sheet('fix', 'views/fix', {word: $scope.search_text}).then($scope.reload)
     }
 
     $scope.reload = function () {
@@ -19,7 +15,6 @@ app.controller('market', function ($scope, api, toast, dialog, sheet) {
             search_text: $scope.search_text,
         }).then(function (response) {
             $scope.words = response
-
             //$scope.openChart($scope.words[0])
         })
     }

@@ -29,7 +29,9 @@ function track($key, $value)
                 "low" => min($last["low"], $value),
                 "high" => max($last["high"], $value),
                 "close" => $value
-            ], ["id" => $last["id"]]);
+            ], ["key" => $key,
+                "period" => $name,
+                "time" => $period_time,]);
         }
     }
 }
@@ -49,7 +51,7 @@ function balanceKey($user_id)
 
 function trackBalance($user_id, $balance)
 {
-    track(balanceKey($user_id), $balance);
+    trackAccumulate(balanceKey($user_id), $balance);
 }
 
 function trackAccumulate($key, $value = 1)

@@ -4,17 +4,20 @@ require_once __DIR__ . '/event_utils.php';
 
 $word = get_string_required("word");
 $fix = get_string_required("fix");
+$type = get_string_required("type");
 $user_id = get_long_required("token");
 
 $user = row("users", ["user_id" => $user_id]);
 
-if ($user["user_balance"] < 50)
-    error("Недостаточно баланса");
+/*if ($user["user_balance"] < 50)
+    error("Недостаточно баланса");*/
 
 update("users", ["user_balance" => $user["user_balance"] - 50], ["user_id" => $user_id]);
-trackBalance($user_id, $user["user_balance"] - 50);
+trackBalance($user_id, - 50);
 
 insertOrUpdate("words", "word", $word, [
+    "user_id" => $user_id,
+    "type" => $type,
     "word" => $word,
     "fix" => $fix,
 ]);

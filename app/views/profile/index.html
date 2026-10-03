@@ -14,29 +14,28 @@
                 <img class="img-white img24 ripple"
                      src="icon/settings.svg"
                      ng-click="$mdMenu.open($event)">
-                <md-menu-content width="4" class="profile-menu">
+                <md-menu-content width="4" class="back-gray50">
                     <md-menu-item>
-                        <md-button ng-click="openSupport($event)">
-                            <img class="img-white img18" src="icon/support.svg">
-                            <div>Связаться с поддержкой</div>
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="copyId()">
-                            <img class="img-white img18" src="icon/copy.svg">
+                        <div class="row asc text-white gap16" md-ink-ripple ng-click="copyId($event)">
+                            <img class="img-white img18 mv16" src="icon/copy.svg">
                             <div>Скопировать ID</div>
-                        </md-button>
+                        </div>
                     </md-menu-item>
                     <md-menu-item>
-                        <md-button ng-click="openEdit()">
-                            <img class="img-white img18" src="icon/user-circle.svg">
-                            <div>Изменить имя</div>
-                        </md-button>
+                        <div class="row asc text-white gap16" md-ink-ripple ng-click="openSupport($event)">
+                            <img class="img-white img18 mv16" src="icon/support.svg">
+                            <div>Поддержка</div>
+                        </div>
                     </md-menu-item>
-                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item>
+                        <div class="row asc text-white gap16" md-ink-ripple ng-click="openEdit($event)">
+                            <img class="img-white img18 mv16" src="icon/user-circle.svg">
+                            <div>Изменить имя</div>
+                        </div>
+                    </md-menu-item>
                     <md-menu-item class="menu-static">
-                        <div class="row asc gap8">
-                            <div class="text-gray">{{version}}</div>
+                        <div class="row aec gap8">
+                            <div class="text-gray">Версия 1.13</div>
                         </div>
                     </md-menu-item>
                 </md-menu-content>
@@ -68,13 +67,12 @@
                     </button>
                 </div>
 
-                <div class="row asc ph16 pb8">
+            </div>
+            <div class="col ph16" ng-if="stats.length">
+                <div class="row asc pb8">
                     <div class="flex text3 bold">Топ слов</div>
                     <div class="text5 text-gray">Статистика</div>
                 </div>
-
-            </div>
-            <div class="col ph16">
                 <div class="row asc gap8 pv12 pv8 r8 anim"
                      md-ink-ripple
                      ng-repeat="item in stats track by item.word"
@@ -93,6 +91,11 @@
                     </div>
                 </div>
             </div>
+            <div class="col gap16 acc ph16 mt32 anim d03"  ng-if="!stats.length">
+                <div class="text-gray">Пока диалогов нет</div>
+                <div class="button2" ng-click="openSupport($event)">Поддержка</div>
+            </div>
+
 
             <div class="empty"></div>
         </div>
