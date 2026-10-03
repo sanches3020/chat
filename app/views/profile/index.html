@@ -67,13 +67,12 @@
                     </button>
                 </div>
 
-                <div class="row asc ph16 pb8">
+            </div>
+            <div class="col ph16" ng-if="stats.length">
+                <div class="row asc pb8">
                     <div class="flex text3 bold">Топ слов</div>
                     <div class="text5 text-gray">Статистика</div>
                 </div>
-
-            </div>
-            <div class="col ph16">
                 <div class="row asc gap8 pv12 pv8 r8 anim"
                      md-ink-ripple
                      ng-repeat="item in stats track by item.word"
@@ -92,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col gap16 acc ph16 mt32 anim d03">
+            <div class="col gap16 acc ph16 mt32 anim d03"  ng-if="!stats.length">
                 <div class="text-gray">Пока диалогов нет</div>
                 <div class="button2" ng-click="openSupport($event)">Поддержка</div>
             </div>
