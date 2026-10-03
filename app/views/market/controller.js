@@ -20,6 +20,10 @@ app.controller('market', function ($scope, api, toast, dialog, sheet) {
     }
     $scope.reload()
 
+    $scope.clear = function () {
+        $scope.search_text = ''
+    }
+
     /*setTimeout(function () {
         $scope.openChart(response[0])
     }, 3000)*/

@@ -1,11 +1,15 @@
 <div class="flex col">
-    <div class="row asc m16">
+    <div class="row asc m16 relative">
         <input type="text"
                autocomplete="off"
                oninput="this.value = this.value.toLowerCase().replace(/[^\p{L}0-9_]/gu, '')"
                ng-model="search_text"
                ng-change="reload()"
                placeholder="Поиск...">
+        <img class="img24 img-white absolute right bottom m8 ripple rd p4"
+             src="icon/close.svg"
+             ng-if="search_text"
+             ng-click="clear()">
     </div>
     <div class="flex col scroll">
         <div class="flex col block">
@@ -23,7 +27,8 @@
             </div>
             <div class="row text-gray m16"
                  ng-if="words && !words.length">
-                не найдено, но можно <div class="ml4 text-blue ripple" ng-click="openFix()">добавить</div>
+                не найдено, но можно
+                <div class="ml4 text-blue ripple" ng-click="openFix()">добавить</div>
             </div>
             <div class="empty"></div>
         </div>
