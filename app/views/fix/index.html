@@ -15,7 +15,17 @@
                    required
                    placeholder="Слово для замены">
         </div>
-
+        <div class="row gap8 scroll-horizontal">
+            <div class="border-blue pv4 ph8 r4"
+                 ng-repeat="(key, val) in word_types"
+                 ng-class="{'back-blue': type == key}"
+                 ng-click="selectType(key)">
+                {{val}}
+            </div>
+        </div>
+        <div class="text5 text-gray">
+            Мы будем предлагать использовать это слово в случайных фразах.
+        </div>
         <button type="submit"
                 ng-disabled="in_progress">
             Купить за 50 монет

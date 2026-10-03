@@ -6,6 +6,7 @@ $dialog_title = get_string_required("dialog_title");
 
 $dialog_id = insert("dialogs", [
     "dialog_title" => $dialog_title,
+    "user_id" => $user_id,
 ]);
 
 insert("subs", [

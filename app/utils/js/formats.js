@@ -221,6 +221,21 @@ function addFormats($scope, $mdDialog) {
     }
 
     swipeToRefresh()
+
+
+
+    $scope.word_types = {
+        'noun': 'сущ.',
+        'verb': 'гл.',
+        'adjective': 'прил.',
+        'pronoun': 'место',
+        'adverb': 'нареч.',
+        'numeral': 'числ.',
+        'preposition': 'предл.',
+        'conjunction': 'союз',
+        'particle': 'част.',
+        'interjection': 'межд.'
+    }
 }
 
 function clone(array) {

@@ -6,10 +6,15 @@ app.controller('fix', function ($scope, api, loader, toast, $mdBottomSheet) {
         $mdBottomSheet.hide()
     }
 
+    $scope.selectType = function (type) {
+        $scope.type = type
+    }
+
     $scope.replace = function () {
         load.post('api/word_update', {
             word: $scope.word,
             fix: $scope.fix,
+            type: $scope.type,
         }).then($scope.close)
     }
 })

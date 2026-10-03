@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Сен 30 2026 г., 16:28
+-- Время создания: Окт 03 2026 г., 07:24
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -28,7 +28,6 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `candles` (
-                           `id` int(11) NOT NULL,
                            `key` varchar(255) COLLATE utf8_bin NOT NULL,
                            `period` varchar(2) COLLATE utf8_bin NOT NULL,
                            `time` int(11) NOT NULL,
@@ -46,8 +45,9 @@ CREATE TABLE `candles` (
 
 CREATE TABLE `dialogs` (
                            `dialog_id` int(11) NOT NULL,
+                           `user_id` int(11) NOT NULL,
                            `dialog_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-                           `dialog_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+                           `dialog_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -122,20 +122,16 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `words` (
-                         `word` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-                         `fix` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+                         `word` varchar(64) NOT NULL,
+                         `fix` varchar(64) NOT NULL,
+                         `type` varchar(64) NOT NULL,
+                         `user_id` int(11) NOT NULL,
+                         `word_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Индексы сохранённых таблиц
 --
-
---
--- Индексы таблицы `candles`
---
-ALTER TABLE `candles`
-    ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `app_key_period_time` (`key`,`period`,`time`);
 
 --
 -- Индексы таблицы `dialogs`
@@ -150,20 +146,8 @@ ALTER TABLE `messages`
     ADD PRIMARY KEY (`message_id`);
 
 --
--- Индексы таблицы `words`
---
-ALTER TABLE `words`
-    ADD UNIQUE KEY `word` (`word`);
-
---
 -- AUTO_INCREMENT для сохранённых таблиц
 --
-
---
--- AUTO_INCREMENT для таблицы `candles`
---
-ALTER TABLE `candles`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `dialogs`

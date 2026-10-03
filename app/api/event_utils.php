@@ -29,7 +29,9 @@ function track($key, $value)
                 "low" => min($last["low"], $value),
                 "high" => max($last["high"], $value),
                 "close" => $value
-            ], ["id" => $last["id"]]);
+            ], ["key" => $key,
+                "period" => $name,
+                "time" => $period_time,]);
         }
     }
 }
