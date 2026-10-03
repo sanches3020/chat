@@ -19,7 +19,7 @@
             <img class="refresh-icon img-gray" src="icon/reload.svg">
             <div class="row p16 asc gap8 r8 anim"
                  md-ink-ripple
-                 ng-repeat="item in words track by item.word"
+                 ng-repeat="item in words track by item.word_id"
                  ng-click="openChart(item, $event)"
                  ng-style="{'animation-delay': ($index * 0.02) + 's'}">
                 <p class="flex">{{item.word}}</p>
