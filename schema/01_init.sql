@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Окт 03 2026 г., 07:53
+-- Время создания: Окт 03 2026 г., 07:56
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -124,9 +124,9 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `words` (
-                         `word` varchar(64) NOT NULL,
-                         `fix` varchar(64) NOT NULL,
-                         `type` varchar(64) NOT NULL,
+                         `word` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                         `fix` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                         `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
                          `user_id` int(11) NOT NULL,
                          `word_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
