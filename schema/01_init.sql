@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: sof-chat-mysql-1
--- Время создания: Окт 03 2026 г., 08:47
+-- Время создания: Окт 03 2026 г., 09:44
 -- Версия сервера: 5.7.44
 -- Версия PHP: 8.3.26
 
@@ -84,6 +84,18 @@ CREATE TABLE `messages` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `sentences`
+--
+
+CREATE TABLE `sentences` (
+                             `sentence_id` int(11) NOT NULL,
+                             `sentence` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                             `sentence_style` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `stats`
 --
 
@@ -149,6 +161,12 @@ ALTER TABLE `messages`
     ADD PRIMARY KEY (`message_id`);
 
 --
+-- Индексы таблицы `sentences`
+--
+ALTER TABLE `sentences`
+    ADD PRIMARY KEY (`sentence_id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -163,6 +181,12 @@ ALTER TABLE `dialogs`
 --
 ALTER TABLE `messages`
     MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `sentences`
+--
+ALTER TABLE `sentences`
+    MODIFY `sentence_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

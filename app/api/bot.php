@@ -33,7 +33,7 @@ for ($step = 0; $step < 60; $step++) {
             $new_value = 0.01;
         }
 
-        track($word, $new_value);
+        track("word_" . $word, $new_value);
     }
 
     println("bot success end");

@@ -44,8 +44,11 @@
         </div>
     </div>
 
-    <form class="row asc gap8 pv8 ph16 m16 back-gray200 r32"
+    <form class="row asc pv8 ph16 m16 back-gray200 r32"
           ng-submit="send()">
+        <div class="r100 p8" ng-click="setRandom()">
+            <img class="img-white img24" src="/icon/reload.svg">
+        </div>
         <textarea class="flex"
                   rows="1"
                   placeholder="Сообщение"

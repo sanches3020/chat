@@ -94,7 +94,7 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, sheet, params) 
     $scope.setPeriod = function (period_name) {
         $scope.period_name = period_name || $scope.period_name
         api.post("api/event_chart", {
-            key: params.word,
+            key: "word_" + params.word,
             period_name: $scope.period_name
         }).then(function (response) {
             if (response.length > 0) {

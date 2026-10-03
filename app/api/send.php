@@ -5,6 +5,7 @@ require_once __DIR__ . '/event_utils.php';
 $user_id = get_long_required("token");
 $dialog_id = get_long_required("dialog_id");
 $message_text = get_string_required("message_text");
+$sentence_id = get_long("sentence_id");
 
 $words = explode(" ", $message_text);
 
@@ -16,7 +17,7 @@ foreach ($words as $word) {
         $count = substr_count($message_result, $word);
         $message_likes += $count;
         $message_result = str_replace($word, $fix["fix"], $message_result);
-        trackAccumulate($word, $count);
+        trackAccumulate("word_" . $word, $count);
         update("words", ["word_rate" => chartValue($word)], ["word" => $word]);
 
         $stat = row("stats", ["user_id" => $user_id, "word" => $word]);
@@ -39,12 +40,15 @@ if ($message_likes > 0) {
 }
 
 update("dialogs", ["dialog_message" => $message_result], ["dialog_id" => $dialog_id]);
+if ($sentence_id != null)
+    trackAccumulate("sentence_" . $sentence_id);
 
 $message_id = insert("messages", [
     "user_id" => $user_id,
     "dialog_id" => $dialog_id,
     "message_text" => $message_text,
     "message_result" => $message_result,
+    "sentence_id" => $sentence_id,
     "message_likes" => $message_likes,
 ]);
 

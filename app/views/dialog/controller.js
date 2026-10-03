@@ -37,6 +37,17 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
         }, event)
     }
 
+    $scope.selectSentence = function (sentence) {
+        $scope.message_text = sentence.sentence
+        $scope.sentence_id = sentence.sentence_id
+    }
+
+    $scope.setRandom = function () {
+        api.post('api/sentence_random', {
+            sentence_style: $scope.sentence_style,
+        }).then($scope.selectSentence)
+    }
+
     $scope.send = function () {
         api.post('api/send', {
             dialog_id: params.dialog_id,

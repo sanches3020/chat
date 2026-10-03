@@ -10,11 +10,11 @@ app.controller('dialogs', function ($scope, $state, api, dialog, sheet, $interva
     $scope.reload = function () {
         api.post('api/dialogs').then(function (result) {
             $scope.dialogs = result
-            /*dialog('chart', 'dialogs/chart', {
-
-            })*/
         })
     }
+    setTimeout(function () {
+        $scope.openDialog($scope.dialogs[0].dialog_id)
+    }, 500)
 
     $scope.reload()
 
