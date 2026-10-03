@@ -27,7 +27,7 @@
                     <img class="img-white img20 m4" src="icon/avatar.svg">
                 </div>
                 <div class="img20 m4" ng-if="item.user_id != user_id && !item.group_end"></div>
-                <div class="col gap4 message-body">
+                <div class="col gap4 message-body ripple">
                     <div class="text5 text-crop nowrap"
                          ng-if="item.user_id != user_id && item.group_end"
                          ng-style="{'color': stringToColor(item.user_name)}">{{item.user_name}}</div>
