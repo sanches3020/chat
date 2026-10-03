@@ -1,4 +1,4 @@
-app.controller('market', function ($scope, api, toast, dialog, sheet) {
+app.controller('market', function ($scope, api, toast, dialog, sheet, $interval) {
 
     addFormats($scope)
 
@@ -24,6 +24,12 @@ app.controller('market', function ($scope, api, toast, dialog, sheet) {
         })
     }
     $scope.reload()
+
+
+    let interval = $interval($scope.reload, 1000)
+    $scope.$on('$destroy', function () {
+        $interval.cancel(interval)
+    })
 
     $scope.clear = function () {
         $scope.search_text = ''

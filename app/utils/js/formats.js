@@ -162,11 +162,11 @@ function addFormats($scope, $mdDialog) {
     }
 
     $scope.currency = function () {
-        return ''
+        return '$'
     }
 
     $scope.formatPrice = function (number, precision = 2) {
-        return $scope.formatCount(number, precision) + ' ' + $scope.currency()
+        return $scope.currency() + '' + $scope.formatCount(number, precision)
     }
 
     $scope.formatAmount = function (number, measure, precision = 3) {

@@ -5,13 +5,24 @@
     font-style: normal;
 }
 
+
+@font-face {
+    font-family: FontMonoBold;
+    src: url("/utils/fonts/RobotoMono-Bold.ttf");
+}
+
 body, button, input, textarea, select {
     font-family: 'GeistMono', monospace !important;
 }
 
-.text-mono {
-    font-family: 'GeistMono', monospace !important;
+.mono {
+    font-family: FontMonoMedium, Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mono.bold {
+    font-family: FontMonoBold, Roboto, "Helvetica Neue", sans-serif;
+}
+
 
 .fixed {
     position: fixed;
