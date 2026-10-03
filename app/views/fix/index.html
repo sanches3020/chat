@@ -18,7 +18,7 @@
         <div class="row gap8 scroll-horizontal">
             <div class="border-blue pv4 ph8 r4"
                  ng-repeat="(key, val) in word_types"
-                 ng-class="{'back-blue': type == key}"
+                 ng-class="{'back-blue': word_type == key}"
                  ng-click="selectType(key)">
                 {{val}}
             </div>

@@ -17,6 +17,8 @@ foreach ($words as $word) {
         $message_likes += $count;
         $message_result = str_replace($word, $fix["fix"], $message_result);
         trackAccumulate($word, $count);
+        update("words", ["word_rate" => chartValue($word)], ["word" => $word]);
+
         $stat = row("stats", ["user_id" => $user_id, "word" => $word]);
         if ($stat != null) {
             update("stats", ["amount" => $stat["amount"] + $count], ["user_id" => $user_id, "word" => $word]);
@@ -45,7 +47,5 @@ $message_id = insert("messages", [
     "message_result" => $message_result,
     "message_likes" => $message_likes,
 ]);
-
-query("update dialogs set dialog_timestamp = now() where dialog_id = " . (int)$dialog_id);
 
 success();
