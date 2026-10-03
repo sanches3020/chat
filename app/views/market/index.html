@@ -1,15 +1,18 @@
 <div class="flex col">
     <div class="row asc m16 relative">
-        <input type="text"
-               autocomplete="off"
+        <input autocomplete="off"
                oninput="this.value = this.value.toLowerCase().replace(/[^\p{L}0-9_]/gu, '')"
                ng-model="search_text"
                ng-change="reload()"
-               placeholder="Поиск...">
+               placeholder="Поиск">
         <img class="img24 img-white absolute right bottom m8 ripple rd p4"
              src="icon/close.svg"
              ng-if="search_text"
              ng-click="clear()">
+        <div class="text-gray300 text5 absolute right bottom m8 ripple rd p4"
+             ng-if="!search_text && stats">
+            из {{stats.count}} слов
+        </div>
     </div>
     <div class="flex col scroll">
         <div class="flex col block">
