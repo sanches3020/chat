@@ -4,6 +4,12 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
 
     $scope.user_id = localStorage.getItem('user_id')
 
+    $scope.show = {}
+
+    $scope.markShow = function () {
+        $scope.show
+    }
+
     function markGroups(messages) {
         for (let i = 0; i < (messages || []).length; i++) {
             let prev = messages[i - 1]
@@ -16,7 +22,7 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
     }
 
     $scope.reload = function () {
-        api.post('api/dialog', {
+        api.postSilent('api/dialog', {
             dialog_id: params.dialog_id
         }).then(function (result) {
             $scope.dialog = result.dialog
@@ -44,7 +50,7 @@ app.controller('dialog', function ($scope, api, toast, $mdDialog, dialog, sheet,
 
     $scope.setRandom = function () {
         api.post('api/sentence_random', {
-            sentence_style: $scope.sentence_style,
+            sentence_style: $scope.dialog.dialog_style,
         }).then($scope.selectSentence)
     }
 

@@ -22,7 +22,7 @@ function track($key, $value)
                 "low" => $value,
                 "high" => $value,
                 "open" => $value,
-                "close" => $value
+                "close" => $value,
             ]);
         } else {
             update("candles", [
@@ -36,11 +36,27 @@ function track($key, $value)
     }
 }
 
-function chartValue($key, $period = "D")
+function chartValue($key)
 {
-    $last = row("candles", ["key" => $key, "period" => $period], get_order('time') . " limit 1");
+    $last = row("candles", ["key" => $key, "period" => "D"], "order by time desc limit 1");
     if ($last != null)
         return $last["close"];
+    return 0;
+}
+
+function chartStart($key)
+{
+    $last = row("candles", ["key" => $key, "period" => "D"], "order by time asc limit 1");
+    if ($last != null)
+        return $last["time"];
+    return 0;
+}
+
+function chartMax($key)
+{
+    $last = row("candles", ["key" => $key, "period" => "D"], "order by high desc limit 1");
+    if ($last != null)
+        return $last["high"];
     return 0;
 }
 

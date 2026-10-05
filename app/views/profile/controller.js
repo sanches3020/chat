@@ -1,8 +1,6 @@
 app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard, $interval) {
     addFormats($scope)
 
-    $scope.version = '1.0.0'
-
     $scope.openChart = function (item, event) {
         dialog('chart', 'views/chart', {word: item.word}, event)
     }
@@ -44,7 +42,7 @@ app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard
     }
 
     $scope.reload = function () {
-        api.post('api/profile').then(function (result) {
+        api.postSilent('api/profile').then(function (result) {
             $scope.user = result.user
             $scope.stats = result.stats
         })
@@ -55,4 +53,12 @@ app.controller('profile', function ($scope, api, dialog, sheet, toast, clipboard
     $scope.$on('$destroy', function () {
         $interval.cancel(interval)
     })
+
+    $scope.openDialog = function (dialog_id, event) {
+        dialog('dialog', 'views/dialog', {dialog_id: dialog_id}, event)
+    }
+
+    $scope.openInvite = function (event) {
+        sheet('invite', 'views/invite', {}, event).then($scope.openDialog)
+    }
 })

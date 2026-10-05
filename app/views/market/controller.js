@@ -11,13 +11,13 @@ app.controller('market', function ($scope, api, toast, dialog, sheet, $interval)
     }
 
     $scope.reload = function () {
-        api.post("api/words", {
+        api.postSilent("api/words", {
             search_text: $scope.search_text,
         }).then(function (response) {
             $scope.words = response
             //$scope.openChart($scope.words[0])
         })
-        api.post("api/words_stats", {
+        api.postSilent("api/words_stats", {
             search_text: $scope.search_text,
         }).then(function (response) {
             $scope.stats = response

@@ -83,9 +83,8 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, sheet, params) 
 
     init()
 
-    $scope.periods = ['S', 'M', 'H', 'D']
+    $scope.periods = ['M', 'H', 'D']
     $scope.period_names = {
-        'S': 'C',
         'M': 'M',
         'H': 'Ч',
         'D': 'Д',
@@ -119,7 +118,7 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, sheet, params) 
         clearInterval(interval)
     })
 
-    api.post("api/event_stats", {key: params.word}).then(function (response) {
+    api.post("api/event_stats", {key: "word_" + params.word}).then(function (response) {
         $scope.stats = response
     })
 

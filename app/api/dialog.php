@@ -5,15 +5,12 @@ $dialog_id = get_long_required("dialog_id");
 
 $response["dialog"] = row("dialogs", ["dialog_id" => $dialog_id]);
 
-$response["dialog"]["users_count"] = scalarSql(
-    "select count(distinct user_id) from messages where dialog_id = " . (int)$dialog_id
-);
+$response["users"] = array_to_map(selectSql("
+select t2.*
+from subs t1
+    left join users t2 on t2.user_id = t1.user_id
+where t1.dialog_id = $dialog_id"), "user_id");
 
-$response["messages"] = selectSql(
-    "select m.*, u.user_name from messages m" .
-    " left join users u on u.user_id = m.user_id" .
-    " where m.dialog_id = " . (int)$dialog_id .
-    get_order("message_timestamp") . get_limits(30)
-);
+$response["messages"] = select("messages", ["dialog_id" => $dialog_id], get_order("message_timestamp") . get_limits(30));
 
 success($response);

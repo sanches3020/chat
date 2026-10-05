@@ -102,7 +102,6 @@ a[title="Charting by TradingView"] {
     display: none;
 }
 
-
 .empty {
     min-height: 150px;
     width: 1px;
@@ -120,4 +119,9 @@ md-backdrop.md-bottom-sheet-backdrop {
     z-index: 99;
 }
 
+.sheet {
+    gap: 16px;
+    padding-top: 16px;
+    padding-bottom: 32px;
+}
 
