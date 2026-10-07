@@ -41,6 +41,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
+      - TG_TOKEN=${TG_TOKEN}
       - APPLICATION_USER=www-data
       - APPLICATION_GROUP=www-data
     networks:
