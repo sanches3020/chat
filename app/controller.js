@@ -1,4 +1,4 @@
-app.controller('main', function ($scope, api, dialog, toast, $state, $transitions) {
+app.controller('main', function ($scope, api, dialog, toast, $state, $transitions, ws) {
     addFormats($scope)
 
 
@@ -39,6 +39,8 @@ app.controller('main', function ($scope, api, dialog, toast, $state, $transition
         updateIndicator($scope.menu_selected)
     })
 
+
+    //ws.connect(123) ^^
 
 
 
