@@ -5,7 +5,7 @@ app.factory('ws', function () {
     let service = {
         connected: false,
         connect: function (name) {
-            let url = location.origin.replace('http', 'ws').replace('app', 'chat')
+            let url = location.origin.replace('http', 'ws').replace('chat', 'wss')
             url += "?name=" + name
             if (socket) socket.close()
             socket = new WebSocket(url)
