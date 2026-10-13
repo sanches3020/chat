@@ -34,7 +34,8 @@ CREATE TABLE `candles` (
                            `low` double NOT NULL,
                            `high` double NOT NULL,
                            `open` double NOT NULL,
-                           `close` double NOT NULL
+                           `close` double NOT NULL,
+                           KEY `key_period_time` (`key`(100),`period`,`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
