@@ -4,35 +4,28 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/utils/php/db.php';
 function track($key, $value)
 {
     $timestamp = time();
-    $periods = [
-        "S" => 1,
-        "M" => 60,
-        "H" => 3600,
-        "D" => 86400
-    ];
+    $period_name = "D";
+    $period_time = floor($timestamp / 86400) * 86400;
 
-    foreach ($periods as $name => $sec) {
-        $period_time = floor($timestamp / $sec) * $sec;
-        $last = row("candles", ["key" => $key, "period" => $name, "time" => $period_time], get_order('time', 'desc') . " limit 1");
-        if ($last == null) {
-            insert("candles", [
-                "key" => $key,
-                "period" => $name,
-                "time" => $period_time,
-                "low" => $value,
-                "high" => $value,
-                "open" => $value,
-                "close" => $value,
-            ]);
-        } else {
-            update("candles", [
-                "low" => min($last["low"], $value),
-                "high" => max($last["high"], $value),
-                "close" => $value
-            ], ["key" => $key,
-                "period" => $name,
-                "time" => $period_time,]);
-        }
+    $last = row("candles", ["key" => $key, "period" => $period_name, "time" => $period_time], get_order('time', 'desc') . " limit 1");
+    if ($last == null) {
+        insert("candles", [
+            "key" => $key,
+            "period" => $period_name,
+            "time" => $period_time,
+            "low" => $value,
+            "high" => $value,
+            "open" => $value,
+            "close" => $value,
+        ]);
+    } else {
+        update("candles", [
+            "low" => min($last["low"], $value),
+            "high" => max($last["high"], $value),
+            "close" => $value
+        ], ["key" => $key,
+            "period" => $period_name,
+            "time" => $period_time,]);
     }
 }
 
