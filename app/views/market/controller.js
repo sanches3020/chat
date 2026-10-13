@@ -1,4 +1,4 @@
-app.controller('market', function ($scope, api, toast, dialog, sheet, $interval) {
+app.controller('market', function ($scope, api, toast, dialog, sheet, $interval, $http) {
 
     addFormats($scope)
 
@@ -15,29 +15,34 @@ app.controller('market', function ($scope, api, toast, dialog, sheet, $interval)
             search_text: $scope.search_text,
         }).then(function (response) {
             $scope.words = response
-            //$scope.openChart($scope.words[0])
-        })
-        api.postSilent("api/words_stats", {
-            search_text: $scope.search_text,
-        }).then(function (response) {
-            $scope.stats = response
+            $scope.updatePrices()
         })
     }
     $scope.reload()
 
+    $scope.updatePrices = function () {
+        if (!$scope.words || !$scope.words.length) return
+        const words = $scope.words.map(item => item.word).join(",")
+        $http.get(location.origin.replace("chat.", "chart.") + "/prices", {
+            params: {words: words}
+        }).then(function (response) {
+            response.data.forEach(item => {
+                const word = $scope.words.find(word => word.word === item.word)
+                if (word) {
+                    word.price = item.price
+                    word.price24 = item.price24
+                }
+            })
+        })
+    }
 
-    let interval = $interval($scope.reload, 1000)
+    let priceTimer = $interval($scope.updatePrices, 1000)
     $scope.$on('$destroy', function () {
-        $interval.cancel(interval)
+        $interval.cancel(priceTimer)
     })
 
     $scope.clear = function () {
         $scope.search_text = ''
     }
-
-
-    /*setTimeout(function () {
-        $scope.openChart(response[0])
-    }, 3000)*/
 
 })

@@ -1,12 +1,13 @@
 {
-  "name": "sof-chat-bot",
+  "name": "sof-chat-chart",
   "version": "1.0.0",
   "private": true,
-  "main": "bot.js",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "mysql2": "^3.11.5"
+    "express": "^4.19.2"
   }
 }

@@ -25,7 +25,7 @@ app.controller('chart', function ($scope, api, toast, $mdDialog, sheet, params, 
     $scope.period_name = "M"
     $scope.setPeriod = function (period_name) {
         $scope.period_name = period_name || $scope.period_name
-        $http.get(botHost() + "/chart", {
+        $http.get(location.origin.replace("chat.", "chart.") + "/chart", {
             params: {
                 key: "word_" + params.word,
                 period: $scope.period_name

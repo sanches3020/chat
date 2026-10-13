@@ -17,16 +17,11 @@ services:
     build: ./bot
     restart: always
     environment:
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
       - APP_HOST=sof-chat-app-1
       - BOT_PORT=8081
     networks:
       - global
     depends_on:
-      - mysql
       - app
 
   app:
