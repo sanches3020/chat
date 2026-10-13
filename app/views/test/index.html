@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS Чат</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; display: flex; flex-direction: column; height: 90vh; }
+        #chat-window { flex: 1; border: 1px solid #ccc; padding: 10px; overflow-y: auto; margin-bottom: 10px; background: #f9f9f9; }
+        #message-form { display: flex; gap: 10px; }
+        #to-input { width: 120px; padding: 8px; }
+        #type-input { width: 100px; padding: 8px; }
+        #message-input { flex: 1; padding: 8px; }
+        button { padding: 8px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h2>Чат (<span id="username-display">...</span>)</h2>
+<div id="chat-window"></div>
+
+<form id="message-form">
+    <input type="text" id="to-input" placeholder="Кому (ID/Имя)..." required autocomplete="off">
+    <input type="text" id="type-input" placeholder="Тип..." value="text" required autocomplete="off">
+    <input type="text" id="message-input" placeholder="Введите сообщение..." required autocomplete="off">
+    <button type="submit" id="send-btn">Отправить</button>
+</form>
+
+<script>
+    const urlParams = new URLSearchParams(location.search)
+    const userName = urlParams.get('name') || 'Аноним'
+
+    document.getElementById('username-display').textContent = userName
+
+    const wsUrl = location.origin.replace('http', 'ws').replace('chat', 'wss')
+    const socketUrl = `${wsUrl}?name=${encodeURIComponent(userName)}`
+
+    const chatWindow = document.getElementById('chat-window')
+    const messageForm = document.getElementById('message-form')
+    const toInput = document.getElementById('to-input')
+    const typeInput = document.getElementById('type-input')
+    const messageInput = document.getElementById('message-input')
+
+    function log(...args) {
+        const msgDiv = document.createElement('div')
+        msgDiv.textContent = args.join(' ')
+        chatWindow.appendChild(msgDiv)
+        chatWindow.scrollTop = chatWindow.scrollHeight
+    }
+
+    log('CONNECTING:', socketUrl)
+    const socket = new WebSocket(socketUrl)
+
+    socket.onopen = () => {
+        log('CONNECTED')
+        toInput.focus()
+    }
+
+    socket.onmessage = (event) => {
+        try {
+            const data = JSON.parse(event.data)
+            if (data.type === 'text') {
+                log(data.from, data.message)
+            }
+        } catch {
+            log(event.data)
+        }
+    }
+
+    socket.onclose = () => {
+        log('CLOSED')
+    }
+
+    socket.onerror = (error) => {
+        log('ERROR')
+        console.error(error)
+    }
+
+    messageForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const to = toInput.value
+        const type = typeInput.value
+        const message = messageInput.value
+
+        if (to && type && message && socket.readyState === WebSocket.OPEN) {
+            socket.send(JSON.stringify({
+                to: to,
+                type: type,
+                message: message
+            }))
+            if (type === 'text') {
+                log('TO:', to, message)
+            }
+
+            messageInput.value = ''
+            messageInput.focus()
+        }
+    })
+</script>
+</body>
+</html>
