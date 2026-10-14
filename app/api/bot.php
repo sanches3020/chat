@@ -9,7 +9,7 @@ for ($step = 0; $step < 60; $step++) {
         $word = $word_row['word'];
 
         if ($step === 0) {
-            $candles = chart($word, "S", 10);
+            $candles = chart($word,/* "S",*/ 10);
 
             if (count($candles) > 0) {
                 $closes = array_column($candles, 'close');

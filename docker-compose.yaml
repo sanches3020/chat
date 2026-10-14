@@ -13,23 +13,28 @@ services:
       - global
 
 
-#  bot:
-#    image: webdevops/php-apache:7.4
-#    restart: always
-#    command: php /app/api/bot.php
-#    volumes:
-#      - ./app:/app
-#    environment:
-#      - DB_HOST=${DB_HOST}
-#      - DB_NAME=${DB_NAME}
-#      - DB_USER=${DB_USER}
-#      - DB_PASS=${DB_PASS}
-#      - APPLICATION_USER=www-data
-#      - APPLICATION_GROUP=www-data
-#    networks:
-#      - global
-#    depends_on:
-#      - mysql
+  chart:
+    build: ./bot
+    restart: always
+    environment:
+      - APP_HOST=sof-chat-app-1
+      - BOT_PORT=8081
+    networks:
+      - global
+    depends_on:
+      - app
+
+
+  wss:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "node server.js"
+    restart: always
+    volumes:
+      - ./wss:/app
+    networks:
+      - global
+
 
   app:
     image: webdevops/php-apache:7.4
@@ -41,6 +46,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
+      - TG_TOKEN=${TG_TOKEN}
       - APPLICATION_USER=www-data
       - APPLICATION_GROUP=www-data
     networks:
